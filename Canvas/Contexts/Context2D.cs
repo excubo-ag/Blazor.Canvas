@@ -5,22 +5,9 @@ using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas.Contexts
 {
-    public class Context2D
+    public partial class Context2D : Context
     {
-        private readonly string ctx;
-        private readonly IJSRuntime js;
-        public Context2D(string ctx, IJSRuntime js)
-        {
-            this.ctx = ctx;
-            this.js = js;
-        }
-        private ValueTask InvokeAsync(string method_name, params object[] parameters) => js.InvokeVoidAsync(ctx + "." + method_name, parameters);
-        private ValueTask<T> InvokeAsync<T>(string method_name, params object[] parameters) => js.InvokeAsync<T>(ctx + "." + method_name, parameters);
-        private ValueTask InvokeEvalAsync(string field, string calculation) => js.InvokeVoidAsync("eval", $"{ctx}.{field} = {calculation}");
-        private ValueTask SetAsync(string field, string value) => InvokeEvalAsync(field, "\"" + value + "\"");
-        private ValueTask SetAsync(string field, bool value) => SetAsync(field, value.ToString());
-        private ValueTask SetAsync(string field, double value) => InvokeEvalAsync(field, value.ToInvariantString());
-        private ValueTask SetAsync<TEnum>(string field, TEnum value) where TEnum : Enum => SetAsync(field, value.ToJsEnumValue());
+        public Context2D(string ctx, IJSRuntime js) : base(ctx, js) { }
         #region drawing rectangles
         public ValueTask ClearRectAsync(double x, double y, double width, double height) => InvokeAsync("clearRect", x, y, width, height);
         public ValueTask FillRectAsync(double x, double y, double width, double height) => InvokeAsync("fillRect", x, y, width, height);
@@ -38,7 +25,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         public ValueTask LineCapAsync(LineCap value) => SetAsync("lineCap", value);
         public ValueTask LineJoinAsync(LineJoin value) => SetAsync("lineJoin", value);
         public ValueTask MiterLimitAsync(double value) => SetAsync("miterLimit", value);
-        public ValueTask<double[]> GetLineDashAsync() => js.InvokeAsync<double[]>(ctx + ".getLineDash");
+        public ValueTask<double[]> GetLineDashAsync() => InvokeAsync<double[]>(ctx + ".getLineDash");
         public ValueTask SetLineDashAsync(double[] segments) => InvokeAsync("setLineDash", segments);
         public ValueTask LineDashOffsetAsync(double value) => SetAsync("lineDashOffset", value);
         #endregion
