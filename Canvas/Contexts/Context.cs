@@ -1,6 +1,7 @@
 ﻿using Excubo.Blazor.Canvas.Extensions;
 using Microsoft.JSInterop;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas.Contexts
@@ -21,5 +22,15 @@ namespace Excubo.Blazor.Canvas.Contexts
         protected ValueTask SetAsync(string field, bool value) => SetAsync(field, value.ToString());
         protected ValueTask SetAsync(string field, double value) => InvokeEvalAsync(field, value.ToInvariantString());
         protected ValueTask SetAsync<TEnum>(string field, TEnum value) where TEnum : Enum => SetAsync(field, value.ToJsEnumValue());
+        protected ValueTask<string> GetStringAsync(string field) => js.InvokeAsync<string>("eval", ctx + "." + field);
+        protected ValueTask<bool> GetBoolAsync(string field) => js.InvokeAsync<bool>("eval", ctx + "." + field);
+        protected ValueTask<double> GetDoubleAsync(string field) => js.InvokeAsync<double>("eval", ctx + "." + field);
+        protected async ValueTask<TEnum> GetAsync<TEnum>(string field) where TEnum : Enum
+        {
+            var value = await GetStringAsync(field);
+            var match = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().FirstOrDefault(v => v.ToJsEnumValue() == value);
+            return match == null ? default : match;
+
+        }
     }
 }
