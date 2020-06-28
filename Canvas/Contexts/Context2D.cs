@@ -20,8 +20,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         private ValueTask SetAsync(string field, string value) => InvokeEvalAsync(field, "\"" + value + "\"");
         private ValueTask SetAsync(string field, bool value) => SetAsync(field, value.ToString());
         private ValueTask SetAsync(string field, double value) => InvokeEvalAsync(field, value.ToInvariantString());
-        private static string ToJsEnumValue<TEnum>(TEnum value) where TEnum : Enum => Enum.GetName(typeof(TEnum), value).ToLowerInvariant().Replace('_', '-');
-        private ValueTask SetAsync<TEnum>(string field, TEnum value) where TEnum : Enum => SetAsync(field, ToJsEnumValue(value));
+        private ValueTask SetAsync<TEnum>(string field, TEnum value) where TEnum : Enum => SetAsync(field, value.ToJsEnumValue());
         #region drawing rectangles
         public ValueTask ClearRectAsync(double x, double y, double width, double height) => InvokeAsync("clearRect", x, y, width, height);
         public ValueTask FillRectAsync(double x, double y, double width, double height) => InvokeAsync("fillRect", x, y, width, height);
@@ -115,7 +114,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         //Still experimental NYI: scrollPathIntoView Path path
         public ValueTask ClipAsync(FillRule fill_rule) => SetAsync("clip", fill_rule);
         //NYI: clip Path path, FillRule fillRule
-        public ValueTask<bool> IsPointInPathAsync(double x, double y, FillRule fill_rule) => InvokeAsync<bool>("isPointInPath", x, y, ToJsEnumValue(fill_rule));
+        public ValueTask<bool> IsPointInPathAsync(double x, double y, FillRule fill_rule) => InvokeAsync<bool>("isPointInPath", x, y, fill_rule.ToJsEnumValue());
         //NYI: isPointInPath Path path, double x, double y, FillRule fillRule
         public ValueTask<bool> IsPointInStrokeAsync(double x, double y) => InvokeAsync<bool>("isPointInStroke", x, y);
         //NYI: isPointInStroke Path path, double x, double y
