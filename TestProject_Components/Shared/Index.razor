@@ -1,0 +1,24 @@
+﻿@page "/"
+
+@using Excubo.Blazor.Canvas
+
+<Canvas @ref="helper_canvas" width="150px" height="300px" />
+<!--OR-->
+@inject Microsoft.JSInterop.IJSRuntime js;
+<canvas @ref="normal_canvas" width="600px" height="300px"></canvas>
+@code {
+    private Canvas helper_canvas;
+    private ElementReference normal_canvas;
+    protected override async Task OnAfterRenderAsync(bool first_render)
+    {
+        if (first_render)
+        {
+            var ctx1 = await helper_canvas.GetContext2DAsync();
+            await ctx1.FontAsync("48px solid");
+            await ctx1.FillTextAsync("Hello", 0, 150);
+            var ctx2 = await js.GetContext2DAsync(normal_canvas);
+            await ctx2.FontAsync("48px serif");
+            await ctx2.StrokeTextAsync("Excubo.Blazor.Canvas", 0, 150);
+        }
+    }
+}

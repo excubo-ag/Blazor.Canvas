@@ -1,0 +1,23 @@
+﻿@inject System.Net.Http.HttpClient HttpClient
+
+@if (CommitHash != null)
+{
+    <a href="https://github.com/excubo-ag/Blazor.Canvas" target="_blank"><img src="https://img.shields.io/badge/built%20from-@(CommitHash.Substring(0, 7))-green?logo=github" /></a>
+}
+
+@code {
+    public string CommitHash { get; set; } = "develop";
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var file = await HttpClient.GetAsync("commit.txt");
+            if (file.IsSuccessStatusCode)
+            {
+                CommitHash = await file.Content.ReadAsStringAsync();
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

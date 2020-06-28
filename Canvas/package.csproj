@@ -1,0 +1,42 @@
+<Project>
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <!--Title, Description, Tags, Product-->
+  <PropertyGroup>
+    <Title>HTML canvas for Blazor</Title>
+    <Description>Excubo.Blazor.Canvas is a lightweight wrapper around the canvas javascript API.</Description>
+    <PackageTags>blazor,html,canvas</PackageTags>
+    <Product>Excubo.Blazor.Canvas</Product>
+  </PropertyGroup>
+  <!--Author, Company-->
+  <PropertyGroup>
+    <Authors>Stefan Lörwald</Authors>
+    <Company>excubo ag</Company>
+  </PropertyGroup>
+  <!--Repository-->
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/excubo-ag/Blazor.Canvas</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/excubo-ag/Blazor.Canvas</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <!--PackageId, Version-->
+  <PropertyGroup>
+    <PackageId>Excubo.Blazor.Canvas</PackageId>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+  <!--Self Include-->
+  <ItemGroup>
+    <None Include="package.csproj" />
+  </ItemGroup>
+  <!--Licensing-->
+  <PropertyGroup>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+</Project>

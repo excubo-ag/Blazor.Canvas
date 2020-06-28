@@ -1,0 +1,12 @@
+﻿@using Microsoft.JSInterop
+@using Excubo.Blazor.Canvas.Contexts
+<canvas @attributes="AdditionalAttributes" @ref="canvas"></canvas>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionalAttributes { get; set; }
+    [Inject]
+    private IJSRuntime js { get; set; }
+    private ElementReference canvas;
+    public Task<Context2D> GetContext2DAsync() => js.GetContext2DAsync(canvas);
+}

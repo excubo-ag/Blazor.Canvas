@@ -1,0 +1,10 @@
+<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="new[] { typeof(TestProject_Components.Shared.NavMenu).Assembly }">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(TestProject_Components.Shared.MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(TestProject_Components.Shared.MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

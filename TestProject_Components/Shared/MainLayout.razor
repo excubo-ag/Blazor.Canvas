@@ -1,0 +1,13 @@
+﻿@inherits LayoutComponentBase
+
+<div style="display:grid; grid-template-columns: 10vw 90vw; height: 100%">
+    <div style="grid-column: 1">
+        <NavMenu />
+    </div>
+
+    <div style="grid-column: 2; padding:2em; background-color:aliceblue">
+        <div style="background-color:white; height: 100%">
+            @Body
+        </div>
+    </div>
+</div>
