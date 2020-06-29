@@ -48,12 +48,16 @@ dotnet add package Excubo.Blazor.Canvas --version 0.1.0
     {
         if (first_render)
         {
-            var ctx1 = await helper_canvas.GetContext2DAsync();
-            await ctx1.FontAsync("48px solid");
-            await ctx1.FillTextAsync("Hello", 0, 150);
-            var ctx2 = await js.GetContext2DAsync(normal_canvas);
-            await ctx2.FontAsync("48px serif");
-            await ctx2.StrokeTextAsync("Excubo.Blazor.Canvas", 0, 150);
+            await using (var ctx1 = await helper_canvas.GetContext2DAsync())
+            {
+                await ctx1.FontAsync("48px solid");
+                await ctx1.FillTextAsync("Hello", 0, 150);
+            }
+            await using (var ctx2 = await js.GetContext2DAsync(normal_canvas))
+            {
+                await ctx2.FontAsync("48px serif");
+                await ctx2.StrokeTextAsync("Excubo.Blazor.Canvas", 0, 150);
+            }
         }
     }
 }
