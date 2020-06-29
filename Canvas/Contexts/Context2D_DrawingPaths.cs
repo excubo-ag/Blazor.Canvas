@@ -11,7 +11,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="fill_rule"></param>
         /// <returns></returns>
-        public ValueTask FillAsync(FillRule fill_rule) => SetAsync("fill", fill_rule);
+        public ValueTask FillAsync(FillRule fill_rule) => InvokeAsync("fill", fill_rule);
         /// <summary>
         /// Fills the current sub-paths with the current fill style.
         /// </summary>
