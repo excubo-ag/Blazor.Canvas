@@ -9,7 +9,10 @@
     private IJSRuntime js { get; set; }
     private ElementReference canvas;
     public Task<Context2D> GetContext2DAsync() => js.GetContext2DAsync(canvas);
+    [Obsolete("Sorry, not yet implemented")]
     public Task<ContextImageBitmapRendering> GetContextImageBitmapRenderingAsync() => js.GetContextImageBitmapRenderingAsync(canvas);
+    [Obsolete("Sorry, not yet implemented")]
     public Task<ContextWebGL> GetContextWebGLAsync() => js.GetContextWebGLAsync(canvas);
+    [Obsolete("Sorry, not yet implemented")]
     public Task<ContextWebGL2> GetContextWebGL2Async() => js.GetContextWebGL2Async(canvas);
 }
