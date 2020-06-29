@@ -3,9 +3,9 @@ using System;
 
 namespace Excubo.Blazor.Canvas.Contexts
 {
-    public partial class ImageBitmapRenderingContext : Context
+    public partial class ContextImageBitmapRendering : Context
     {
-        internal ImageBitmapRenderingContext(string ctx, IJSRuntime js) : base(ctx, js) { }
+        internal ContextImageBitmapRendering(string ctx, IJSRuntime js) : base(ctx, js) { }
         /// <summary>
         /// Displays the given ImageBitmap in the canvas associated with this rendering context. Ownership of the ImageBitmap is transferred to the canvas. This was previously named transferImageBitmap(), but was renamed in a spec change. The old name is being kept as an alias to avoid code breakage.
         /// 

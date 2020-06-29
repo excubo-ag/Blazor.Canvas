@@ -13,11 +13,23 @@ namespace Excubo.Blazor.Canvas
             await js.InvokeVoidAsync("eval", command);
             return new Context2D(context_id, js);
         }
-        public static async Task<ImageBitmapRenderingContext> GetImageBitmapRenderingContextAsync(this IJSRuntime js, ElementReference canvas)
+        public static async Task<ContextImageBitmapRendering> GetContextImageBitmapRenderingAsync(this IJSRuntime js, ElementReference canvas)
         {
             var (context_id, command) = BuildEvalCommand(canvas, "bitmaprenderer");
             await js.InvokeVoidAsync("eval", command);
-            return new ImageBitmapRenderingContext(context_id, js);
+            return new ContextImageBitmapRendering(context_id, js);
+        }
+        public static async Task<ContextWebGL> GetContextWebGLAsync(this IJSRuntime js, ElementReference canvas)
+        {
+            var (context_id, command) = BuildEvalCommand(canvas, "webgl");
+            await js.InvokeVoidAsync("eval", command);
+            return new ContextWebGL(context_id, js);
+        }
+        public static async Task<ContextWebGL2> GetContextWebGL2Async(this IJSRuntime js, ElementReference canvas)
+        {
+            var (context_id, command) = BuildEvalCommand(canvas, "webgl2");
+            await js.InvokeVoidAsync("eval", command);
+            return new ContextWebGL2(context_id, js);
         }
         private static (string Id, string Command) BuildEvalCommand(ElementReference canvas, string type)
         {
