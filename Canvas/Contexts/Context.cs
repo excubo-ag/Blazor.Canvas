@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas.Contexts
 {
-    public class Context
+    public class Context : IAsyncDisposable
     {
         protected readonly string ctx;
         private readonly IJSRuntime js;
@@ -37,5 +37,6 @@ namespace Excubo.Blazor.Canvas.Contexts
             return match == null ? default : match;
 
         }
+        public ValueTask DisposeAsync() => js.InvokeVoidAsync("eval", $"window.{ctx} = undefined");
     }
 }
