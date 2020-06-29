@@ -60,6 +60,23 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
+        public ValueTask TransformAsync(object values) => InvokeAsync("transform", values);
+        /// <summary>
+        /// Multiplies the current transformation matrix with the matrix described by its arguments.
+        /// </summary>
+        /// <param name="horizontal_scale"></param>
+        /// <param name="vertical_skewing"></param>
+        /// <param name="horizontal_skewing"></param>
+        /// <param name="vertical_scaling"></param>
+        /// <param name="horizontal_translation"></param>
+        /// <param name="vertical_translation"></param>
+        /// <returns></returns>
+        public ValueTask SetTransformAsync(double horizontal_scale, double vertical_skewing, double horizontal_skewing, double vertical_scaling, double horizontal_translation, double vertical_translation) => InvokeAsync("setTransform", horizontal_scale, vertical_skewing, horizontal_skewing, vertical_scaling, horizontal_translation, vertical_translation);
+        /// <summary>
+        /// Resets the current transform to the identity matrix, and then invokes the transform() method with the same arguments.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public ValueTask SetTransformAsync(object values) => InvokeAsync("setTransform", values);
         /// <summary>
         /// Resets the current transform by the identity matrix.
