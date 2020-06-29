@@ -1,0 +1,45 @@
+﻿@page "/2D/DrawingRectangles"
+<h3>DrawingRectangles</h3>
+
+For more information, please visit <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/</a>.
+
+<h4>TODO</h4>
+
+<Canvas @ref="canvas" width="400px" height="400px" style="border: 5px solid red" />
+
+<ol>
+    @if (Messages != null)
+    {
+        foreach (var message in Messages)
+        {
+            <li>@message</li>
+        }
+    }
+</ol>
+
+@code {
+    private Canvas canvas;
+    private List<string> Messages = new List<string>();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await UpdateCanvasAsync();
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private async Task UpdateCanvasAsync()
+    {
+        var messages = new List<string>();
+        await using (var ctx = await canvas.GetContext2DAsync())
+        {
+            await ctx.ClearRectAsync(0, 0, 400, 400);
+            await ctx.SetTransformAsync(1, 0, 0, 1, 0, 0);
+            await ctx.RestoreAsync();
+            await ctx.SaveAsync();
+            messages.Add("Cleared");
+            await ctx.FillTextAsync("Hello", 0, 100);
+            messages.Add("Wrote hello");
+            await ctx.FillTextAsync("canvas", 100, 10);
+            messages.Add("Wrote canvas");
+            Messages = messages;
+        }
+    }
+}

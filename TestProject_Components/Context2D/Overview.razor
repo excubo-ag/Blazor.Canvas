@@ -1,0 +1,170 @@
+﻿@page "/2D"
+<h3>Context2D Overview</h3>
+
+<a href="/2D/CanvasState"><Canvas @ref="CanvasState" width="240px" height="125px" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="/2D/Compositing"><Canvas @ref="Compositing" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/DrawingImages"><Canvas @ref="DrawingImages" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/DrawingRectangles"><Canvas @ref="DrawingRectangles" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/DrawingText"><Canvas @ref="DrawingText" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/FillAndStrokeStyles"><Canvas @ref="FillAndStrokeStyles" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/Filters"><Canvas @ref="Filters" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/HitRegions"><Canvas @ref="HitRegions" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/ImageSmoothing"><Canvas @ref="ImageSmoothing" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/LineStyles"><Canvas @ref="LineStyles" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/Paths"><Canvas @ref="Paths" width="240px" height="125px" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="/2D/PixelManipulation"><Canvas @ref="PixelManipulation" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/Shadows"><Canvas @ref="Shadows" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/TextStyles"><Canvas @ref="TextStyles" width="240px" height="125px"  style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px"/></a>
+<a href="/2D/Transformations"><Canvas @ref="Transformations" width="240px" height="125px" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+
+@code {
+    private Canvas CanvasState;
+    private Canvas Compositing;
+    private Canvas DrawingImages;
+    private Canvas DrawingRectangles;
+    private Canvas DrawingText;
+    private Canvas FillAndStrokeStyles;
+    private Canvas Filters;
+    private Canvas HitRegions;
+    private Canvas ImageSmoothing;
+    private Canvas LineStyles;
+    private Canvas Paths;
+    private Canvas PixelManipulation;
+    private Canvas Shadows;
+    private Canvas TextStyles;
+    private Canvas Transformations;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await using (var ctx = await CanvasState.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(CanvasState), 120, 50);
+            }
+            await using (var ctx = await Compositing.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Compositing), 120, 50);
+                await ctx.GlobalCompositeOperationAsync(CompositeOperation.Multiply);
+                await ctx.FillStyleAsync("blue");
+                await ctx.FillRectAsync(60, 60, 50, 50);
+                await ctx.FillStyleAsync("red");
+                await ctx.FillRectAsync(90, 80, 50, 50);
+            }
+            await using (var ctx = await DrawingImages.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(DrawingImages), 120, 50);
+            }
+            await using (var ctx = await DrawingRectangles.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(DrawingRectangles), 120, 50);
+                await ctx.FillRectAsync(40, 60, 50, 50);
+                await ctx.StrokeRectAsync(110, 60, 50, 50);
+            }
+            await using (var ctx = await DrawingText.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(DrawingText), 120, 50);
+                await ctx.FontAsync("12px sans-serif");
+                await ctx.FillTextAsync("Just text", 80, 80);
+            }
+            await using (var ctx = await FillAndStrokeStyles.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(FillAndStrokeStyles), 120, 50);
+                await ctx.FillStyleAsync("green");
+                await ctx.FillRectAsync(40, 60, 50, 50);
+                await ctx.StrokeStyleAsync("blue");
+                await ctx.SetLineDashAsync(new double[] { 2, 2 });
+                await ctx.StrokeRectAsync(110, 60, 50, 50);
+            }
+            await using (var ctx = await Filters.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Filters), 120, 50);
+            }
+            await using (var ctx = await HitRegions.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(HitRegions), 120, 50);
+            }
+            await using (var ctx = await ImageSmoothing.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(ImageSmoothing), 120, 50);
+            }
+            await using (var ctx = await LineStyles.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(LineStyles), 120, 50);
+                await ctx.SetLineDashAsync(new double[] { 2, 2 });
+                await ctx.LineCapAsync(LineCap.Round);
+                await ctx.LineWidthAsync(4);
+                await ctx.BeginPathAsync();
+                await ctx.MoveToAsync(00, 60);
+                await ctx.LineToAsync(120, 60);
+                await ctx.StrokeAsync();
+            }
+            await using (var ctx = await Paths.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Paths), 120, 50);
+                await ctx.BeginPathAsync();
+                await ctx.MoveToAsync(00, 60);
+                await ctx.LineToAsync(120, 60);
+                await ctx.LineToAsync(120, 80);
+                await ctx.BezierCurveToAsync(120, 100, 100, 100, 80, 80);
+                await ctx.StrokeAsync();
+            }
+            await using (var ctx = await PixelManipulation.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(PixelManipulation), 120, 50);
+            }
+            await using (var ctx = await Shadows.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Shadows), 120, 50);
+                await ctx.ShadowBlurAsync(1);
+                await ctx.ShadowColorAsync("yellow");
+                await ctx.ShadowOffsetXAsync(10);
+                await ctx.ShadowOffsetYAsync(10);
+                await ctx.FillRectAsync(60, 80, 30, 30);
+            }
+            await using (var ctx = await TextStyles.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(TextStyles), 120, 50);
+                await ctx.FontAsync("italic 1.2em 'Fira Sans', serif");
+                await ctx.FillTextAsync("Beautiful text", 80, 80);
+            }
+            await using (var ctx = await Transformations.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Transformations), 120, 50);
+                await ctx.TransformAsync(1, 0, 1.2, 1, 0, 0);
+                await ctx.FontAsync("12px sans-serif");
+                await ctx.FillTextAsync(nameof(Transformations), 0, 100);
+            }
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

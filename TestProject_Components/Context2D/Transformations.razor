@@ -1,0 +1,126 @@
+﻿@page "/2D/Transformations"
+<h3>Transformations</h3>
+
+<Canvas @ref="canvas" width="400px" height="400px" style="border: 5px solid red" />
+<ul>
+    <li>
+        <label for="rotate">Rotate</label>
+        <input id="rotate" type="checkbox" @bind-value="@Rotate" />
+    </li>
+    <li>
+        <label for="CurrentTransform">Current Transform</label>
+        <input id="CurrentTransform" type="checkbox" @bind-value="@CurrentTransform" />
+    </li>
+    <li>
+        <label for="Scale">Scale</label>
+        <input id="Scale" type="checkbox" @bind-value="@Scale" />
+    </li>
+    <li>
+        <label for="Translate">Translate</label>
+        <input id="Translate" type="checkbox" @bind-value="@Translate" />
+    </li>
+    <li>
+        <label for="Transform">Transform</label>
+        <input id="Transform" type="checkbox" @bind-value="@Transform" />
+    </li>
+    <li>
+        <label for="ResetTransform">Reset Transform</label>
+        <input id="ResetTransform" type="checkbox" @bind-value="@ResetTransform" />
+    </li>
+</ul>
+
+<ol>
+    @if (Messages != null)
+    {
+        foreach (var message in Messages)
+        {
+            <li>@message</li>
+        }
+    }
+</ol>
+
+@code {
+    private Canvas canvas;
+    private List<string> Messages = new List<string>();
+    private bool Rotate { get; set; }
+    private bool CurrentTransform { get; set; }
+    private bool Scale { get; set; }
+    private bool Translate { get; set; }
+    private bool Transform { get; set; }
+    private bool ResetTransform { get; set; }
+    private bool[] last_render = new bool[] { true, true, true, true, true, true };
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var current_state = new bool[] { Rotate, CurrentTransform, Scale, Translate, Transform, ResetTransform };
+        if (!current_state.SequenceEqual(last_render))
+        {
+            last_render = current_state;
+            await UpdateCanvasAsync();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private async Task UpdateCanvasAsync()
+    {
+        Messages.Clear();
+        await using (var ctx = await canvas.GetContext2DAsync())
+        {
+            await ctx.ClearRectAsync(0, 0, 400, 400);
+            await ctx.SetTransformAsync(1, 0, 0, 1, 0, 0);
+            await ctx.RestoreAsync();
+            await ctx.SaveAsync();
+            Messages.Add("Cleared");
+            await ctx.FillTextAsync("Hello", 0, 100);
+            Messages.Add("Wrote hello");
+            if (Rotate)
+            {
+                await ctx.RotateAsync(45);
+                Messages.Add("Rotated by 45°");
+            }
+            try
+            {
+                if (CurrentTransform)
+                {
+                    var current = await ctx.CurrentTransformAsync();
+                    Messages.Add($"Retrieved current transform: {current}");
+                    await ctx.CurrentTransformAsync(current);
+                    Messages.Add("Set current transform");
+                }
+            }
+            catch
+            {
+                Messages.Add("Experimental API for retrieving/setting current transform failed in your browser.");
+            }
+            if (Scale)
+            {
+                await ctx.ScaleAsync(1.1, 1.1);
+                Messages.Add("Scaled by 10%");
+            }
+            if (Translate)
+            {
+                await ctx.TranslateAsync(10, 10);
+                Messages.Add("Translated by 10px,10px");
+            }
+            if (Transform)
+            {
+                await ctx.TransformAsync(1, 1, 10, 1, 2, 0);
+                Messages.Add("Transform with matrix");
+            }
+            try
+            {
+                if (ResetTransform)
+                {
+                    await ctx.ResetTransformAsync();
+                    Messages.Add("Reset transform");
+                }
+            }
+            catch
+            {
+                Messages.Add("Experimental API for resetting transform failed in your browser");
+            }
+            await ctx.FillTextAsync("canvas", 100, 10);
+            Messages.Add("Wrote canvas");
+            Messages = Messages.ToList();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+}

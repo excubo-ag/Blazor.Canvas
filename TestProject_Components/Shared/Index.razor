@@ -6,19 +6,34 @@
 <!--OR-->
 @inject Microsoft.JSInterop.IJSRuntime js;
 <canvas @ref="normal_canvas" width="600px" height="300px"></canvas>
+
+<hr/>
+
+<a href="/2D"><Canvas @ref="Canvas2D" width="240px" height="125px" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 @code {
     private Canvas helper_canvas;
     private ElementReference normal_canvas;
+    private Canvas Canvas2D;
     protected override async Task OnAfterRenderAsync(bool first_render)
     {
         if (first_render)
         {
-            var ctx1 = await helper_canvas.GetContext2DAsync();
-            await ctx1.FontAsync("48px solid");
-            await ctx1.FillTextAsync("Hello", 0, 150);
-            var ctx2 = await js.GetContext2DAsync(normal_canvas);
-            await ctx2.FontAsync("48px serif");
-            await ctx2.StrokeTextAsync("Excubo.Blazor.Canvas", 0, 150);
+            await using (var ctx1 = await helper_canvas.GetContext2DAsync())
+            {
+                await ctx1.FontAsync("48px solid");
+                await ctx1.FillTextAsync("Hello", 0, 150);
+            }
+            await using (var ctx2 = await js.GetContext2DAsync(normal_canvas))
+            {
+                await ctx2.FontAsync("48px serif");
+                await ctx2.StrokeTextAsync("Excubo.Blazor.Canvas", 0, 150);
+            }
+            await using (var ctx = await Canvas2D.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Canvas2D), 120, 50);
+            }
         }
     }
 }
