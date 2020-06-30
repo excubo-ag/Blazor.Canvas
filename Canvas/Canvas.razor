@@ -8,11 +8,15 @@
     [Inject]
     private IJSRuntime js { get; set; }
     private ElementReference canvas;
-    public Task<Context2D> GetContext2DAsync() => js.GetContext2DAsync(canvas);
+    public Task<Context2D> GetContext2DAsync(bool alpha = true, bool desynchronized = false) => js.GetContext2DAsync(canvas, alpha, desynchronized);
     [Obsolete("Sorry, not yet implemented")]
     public Task<ContextImageBitmapRendering> GetContextImageBitmapRenderingAsync() => js.GetContextImageBitmapRenderingAsync(canvas);
     [Obsolete("Sorry, not yet implemented")]
-    public Task<ContextWebGL> GetContextWebGLAsync() => js.GetContextWebGLAsync(canvas);
+    public Task<ContextWebGL> GetContextWebGLAsync(
+        bool alpha = true, bool desynchronized = false, bool antialias = false, bool depth = false, bool fail_if_major_performance_caveat = false,
+        PowerPreference power_preference = PowerPreference.Default, bool premultiplied_alpha = false, bool preserve_drawing_buffer = false, bool stencil = false)
+        => js.GetContextWebGLAsync(canvas, alpha, desynchronized, antialias, depth, fail_if_major_performance_caveat,
+            power_preference, premultiplied_alpha, preserve_drawing_buffer, stencil);
     [Obsolete("Sorry, not yet implemented")]
     public Task<ContextWebGL2> GetContextWebGL2Async() => js.GetContextWebGL2Async(canvas);
 }
