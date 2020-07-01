@@ -22,6 +22,10 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
         <input id="Translate" type="checkbox" @bind-value="@Translate" />
     </li>
     <li>
+        <label for="GetTransform">GetTransform</label>
+        <input id="GetTransform" type="checkbox" @bind-value="@GetTransform" />
+    </li>
+    <li>
         <label for="Transform">Transform</label>
         <input id="Transform" type="checkbox" @bind-value="@Transform" />
     </li>
@@ -49,11 +53,12 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
     private bool Scale { get; set; }
     private bool Translate { get; set; }
     private bool Transform { get; set; }
+    private bool GetTransform { get; set; }
     private bool ResetTransform { get; set; }
-    private bool[] last_render = new bool[] { true, true, true, true, true, true };
+    private bool[] last_render = new bool[] { true, true, true, true, true, true, true };
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var current_state = new bool[] { Rotate, CurrentTransform, Scale, Translate, Transform, ResetTransform };
+        var current_state = new bool[] { Rotate, CurrentTransform, Scale, Translate, Transform, GetTransform, ResetTransform };
         if (!current_state.SequenceEqual(last_render))
         {
             last_render = current_state;
@@ -78,22 +83,6 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
                 await ctx.RotateAsync(45);
                 Messages.Add("Rotated by 45°");
             }
-            try
-            {
-                if (CurrentTransform)
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    var current = await ctx.CurrentTransformAsync();
-#pragma warning restore CS0618 // Type or member is obsolete
-                    Messages.Add($"Retrieved current transform: {current}");
-                    await ctx.CurrentTransformAsync(current);
-                    Messages.Add("Set current transform");
-                }
-            }
-            catch
-            {
-                Messages.Add("Experimental API for retrieving/setting current transform failed in your browser.");
-            }
             if (Scale)
             {
                 await ctx.ScaleAsync(1.1, 1.1);
@@ -108,6 +97,27 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
             {
                 await ctx.TransformAsync(1, 1, 10, 1, 2, 0);
                 Messages.Add("Transform with matrix");
+            }
+            Excubo.Blazor.Canvas.Contexts.DOMMatrix matrix = null;
+            if (GetTransform)
+            {
+                matrix = await ctx.GetTransformAsync();
+            }
+            try
+            {
+                if (CurrentTransform)
+                {
+#pragma warning disable CS0618 // Type or member is obsolete
+                    await ctx.CurrentTransformAsync(matrix);
+                    Messages.Add("Set current transform");
+                    var current = await ctx.CurrentTransformAsync();
+                    Messages.Add($"Retrieved current transform: {current}");
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+            catch
+            {
+                Messages.Add("Experimental API for retrieving/setting current transform failed in your browser.");
             }
             try
             {

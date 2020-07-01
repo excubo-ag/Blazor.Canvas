@@ -10,20 +10,20 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public ValueTask CurrentTransformAsync(object value) => SetAsync("currentTransform", value);
+        public ValueTask CurrentTransformAsync(DOMMatrix value) => SetAsync("currentTransform", value);
         /// <summary>
         /// Current transformation matrix
-        /// Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.
+        /// Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/currentTransform.
         /// Last checked: 2020-06-28. If you get the "Obsolete" message, but the state is no longer experimental, please contact the library maintainers.
         /// </summary>
         /// <returns></returns>
-        [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.")]
-        public ValueTask<object> CurrentTransformAsync() => GetObjectAsync("currentTransform");
+        [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/currentTransform.")]
+        public ValueTask<DOMMatrix> CurrentTransformAsync() => GetObjectAsync<DOMMatrix>("currentTransform");
         /// <summary>
         /// Retrieves the current transformation matrix being applied to the context.
         /// </summary>
         /// <returns></returns>
-        public ValueTask<object> GetTransformAsync() => InvokeOnCtxAsync<object>("getTransform");
+        public ValueTask<DOMMatrix> GetTransformAsync() => InvokeOnCtxAsync<DOMMatrix>("getTransform");
         /// <summary>
         /// Adds a rotation to the transformation matrix. The angle argument represents a clockwise rotation angle and is expressed in radians
         /// </summary>
@@ -60,7 +60,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public ValueTask TransformAsync(object values) => InvokeOnCtxAsync("transform", values);
+        public ValueTask TransformAsync(DOMMatrix values) => InvokeOnCtxAsync("transform", values);
         /// <summary>
         /// Multiplies the current transformation matrix with the matrix described by its arguments.
         /// </summary>
@@ -77,7 +77,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public ValueTask SetTransformAsync(object values) => InvokeOnCtxAsync("setTransform", values);
+        public ValueTask SetTransformAsync(DOMMatrix values) => InvokeOnCtxAsync("setTransform", values);
         /// <summary>
         /// Resets the current transform by the identity matrix.
         /// Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.

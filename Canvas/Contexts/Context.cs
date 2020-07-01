@@ -31,6 +31,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         protected ValueTask<double> GetDoubleAsync(string field) => js.InvokeAsync<double>("eval", ctx + "." + field);
         [Obsolete("obj parameter type is not meant for long-term. Replace ASAP")]
         protected ValueTask<object> GetObjectAsync(string field) => js.InvokeAsync<object>("eval", ctx + "." + field);
+        protected ValueTask<T> GetObjectAsync<T>(string field) => js.InvokeAsync<T>("eval", ctx + "." + field);
         protected async ValueTask<TEnum> GetAsync<TEnum>(string field) where TEnum : Enum
         {
             var value = await GetStringAsync(field);
@@ -38,6 +39,6 @@ namespace Excubo.Blazor.Canvas.Contexts
             return match == null ? default : match;
 
         }
-        public ValueTask DisposeAsync() => js.InvokeVoidAsync("eval", $"window.{ctx} = undefined");
+        public ValueTask DisposeAsync() => js.InvokeVoidAsync("eval", $"delete window.{ctx}");
     }
 }
