@@ -35,13 +35,13 @@ namespace Excubo.Blazor.Canvas.Contexts
             $"{ctx}.fillStyle = gradient;"); // set gradient
         /// <summary>
         /// Color or style to use inside shapes.
-        /// // TODO pattern
         /// </summary>
-        /// <param name="pattern"></param>
-        private void FillStyleAsync(object pattern)
-        {
-            //TODO FillStyleAsync
-        }
+        /// <param name="image"></param>
+        /// <param name="repetition"></param>
+        public ValueTask FillStyleAsync(string image, Repetition repetition) => InvokeEvalAsync(
+            $"image = {image};" +
+            $"pattern = {ctx}.createPattern(image, {repetition.ToJsEnumValue()});" +
+            $"{ctx}.fillStyle = pattern;");
         /// <summary>
         /// Color or style to use for the lines around shapes. Default #000 (black).
         /// </summary>
@@ -71,13 +71,13 @@ namespace Excubo.Blazor.Canvas.Contexts
             $"{ctx}.strokeStyle = gradient;"); // set gradient
         /// <summary>
         /// Color or style to use inside shapes.
-        /// // TODO pattern
         /// </summary>
-        /// <param name="pattern"></param>
-        private void StrokeStyleAsync(object pattern)
-        {
-            //TODO StrokeStyleAsync
-        }
+        /// <param name="image"></param>
+        /// <param name="repetition"></param>
+        public ValueTask StrokeStyleAsync(string image, Repetition repetition) => InvokeEvalAsync(
+            $"image = {image};" +
+            $"pattern = {ctx}.createPattern(image, {repetition.ToJsEnumValue()});" +
+            $"{ctx}.strokeStyle = pattern;");
         // gradients and patterns:
         // no API call here, as the APIs are merged with the FillStyle / StrokeStyle APIs.
     }
