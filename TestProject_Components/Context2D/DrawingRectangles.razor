@@ -2,11 +2,9 @@
 <h3>DrawingRectangles</h3>
 
 For more information, please visit <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/</a>.
-
-<h4>TODO</h4>
-
+<hr />
 <Canvas @ref="canvas" width="400" height="400" style="border: 5px solid red" />
-
+<hr />
 <ol>
     @if (Messages != null)
     {
@@ -39,6 +37,10 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
             messages.Add("Wrote hello");
             await ctx.FillTextAsync("canvas", 100, 10);
             messages.Add("Wrote canvas");
+            await ctx.FillRectAsync(100, 100, 100, 100);
+            messages.Add("Filled rectangle");
+            await ctx.StrokeRectAsync(210, 100, 100, 100);
+            messages.Add("Stroked rectangle");
             Messages = messages;
         }
     }
