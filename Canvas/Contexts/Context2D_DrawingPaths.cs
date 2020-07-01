@@ -17,10 +17,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="path"></param>
         /// <param name="fill_rule"></param>
-        private void FillAsync(object path, FillRule fill_rule)
-        {
-            // TODO FillAsync
-        }
+        public ValueTask FillAsync(string path, FillRule fill_rule) => InvokeEvalAsync($"path = {path}; {ctx}.stroke(path, {fill_rule.ToJsEnumValue()});");
         /// <summary>
         /// Strokes the current sub-paths with the current stroke style.
         /// </summary>
@@ -31,27 +28,18 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private void StrokeAsync(object path)
-        {
-            // TODO StrokeAsync
-        }
+        public ValueTask StrokeAsync(string path) => InvokeEvalAsync($"path = {path}; {ctx}.stroke(path);");
         /// <summary>
         /// If a given element is focused, this method draws a focus ring around the current path.
         /// </summary>
         /// <param name="element"></param>
-        private void drawFocusIfNeeded(object element)
-        {
-            // TODO drawFocusIfNeeded
-        }
+        public ValueTask DrawFocusIfNeededAsync(string element) => InvokeEvalAsync($"el = {element}; {ctx}.drawFocusIfNeeded(el);");
         /// <summary>
         /// If a given element is focused, this method draws a focus ring around the current path.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="element"></param>
-        private void drawFocusIfNeeded(object path, object element)
-        {
-            // TODO drawFocusIfNeeded
-        }
+        public ValueTask DrawFocusIfNeededAsync(string path, string element) => InvokeEvalAsync($"path = {path}; el = {element}; {ctx}.drawFocusIfNeeded(path, el);");
         /// <summary>
         /// Scrolls the current path or a given path into the view.
         /// Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scrollPathIntoView.
@@ -68,10 +56,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <returns></returns>
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scrollPathIntoView.")]
-        private void scrollPathIntoView(object path)
-        {
-            // TODO scrollPathIntoView
-        }
+        public ValueTask ScrollPathIntoViewAsync(object path) => InvokeEvalAsync($"path = {path}; {ctx}.scrollPathIntoView(path);");
         /// <summary>
         /// Creates a clipping path from the current sub-paths. Everything drawn after clip() is called appears inside the clipping path only. For an example, see Clipping paths in the Canvas tutorial.
         /// </summary>
@@ -83,10 +68,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="path"></param>
         /// <param name="fill_rule"></param>
-        private void clip(object path, FillRule fill_rule)
-        {
-            //TODO clip
-        }
+        public ValueTask ClipAsync(string path, FillRule fill_rule) => InvokeEvalAsync($"path = {path}; {ctx}.clip(path, {fill_rule.ToJsEnumValue()});");
         /// <summary>
         /// Reports whether or not the specified point is contained in the current path.
         /// </summary>
@@ -102,10 +84,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="fill_rule"></param>
-        private void isPointInPath(object path, double x, double y, FillRule fill_rule)
-        {
-            //TODO isPointInPath
-        }
+        public ValueTask<bool> IsPointInPathAsync(string path, double x, double y, FillRule fill_rule) => InvokeEvalAsync<bool>($"path = {path}; {ctx}.isPointInPath(path, {x.ToInvariantString()}, {y.ToInvariantString()}, {fill_rule.ToJsEnumValue()});");
         /// <summary>
         /// Reports whether or not the specified point is inside the area contained by the stroking of a path.
         /// </summary>
@@ -119,9 +98,6 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="path"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void isPointInStroke(object path, double x, double y)
-        {
-            //TODO isPointInStroke
-        }
+        public ValueTask<bool> IsPointInStrokeAsync(string path, double x, double y, FillRule fill_rule) => InvokeEvalAsync<bool>($"path = {path}; {ctx}.isPointInStroke(path, {x.ToInvariantString()}, {y.ToInvariantString()});");
     }
 }

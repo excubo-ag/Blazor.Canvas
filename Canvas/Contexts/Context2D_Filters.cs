@@ -14,7 +14,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="filter_functions">A set of filter functions</param>
         /// <returns></returns>
-        public ValueTask FilterAsync(params string[] filter_functions) => InvokeEvalAsync("filter", string.Join(" ", filter_functions));
+        public ValueTask FilterAsync(params string[] filter_functions) => SetAsync("filter", string.Join(" ", filter_functions));
         /// <summary>
         /// Applies a CSS or SVG filter to the canvas, e.g., to change its brightness or bluriness.
         /// </summary>

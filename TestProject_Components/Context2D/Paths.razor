@@ -22,6 +22,10 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
         <label for="@nameof(Bezier)">@nameof(Bezier)</label>
         <input id="@nameof(Bezier)" type="checkbox" @bind-value="@Bezier" />
     </li>
+    <li>
+        <label for="@nameof(Custom)">@nameof(Custom)</label>
+        <input id="@nameof(Custom)" type="checkbox" @bind-value="@Custom" />
+    </li>
 </ul>
 
 <ol>
@@ -41,10 +45,11 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
     private bool Ellipse { get; set; }
     private bool Quadratic { get; set; }
     private bool Bezier { get; set; }
-    private bool[] last_render = new bool[] { true, true, true, true };
+    private bool Custom { get; set; }
+    private bool[] last_render = new bool[] { true, true, true, true, true };
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var current_state = new bool[] { Lines, Ellipse, Quadratic, Bezier };
+        var current_state = new bool[] { Lines, Ellipse, Quadratic, Bezier, Custom };
         if (!current_state.SequenceEqual(last_render))
         {
             last_render = current_state;
@@ -99,7 +104,17 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
                 await ctx.StrokeAsync();
                 messages.Add("Added bezier curve");
             }
+            if (Custom)
+            {
+                await js.InvokeVoidAsync("eval", $"mypath = new Path2D(); mypath.rect(10, 10, 100, 100);");
+                await ctx.StrokeAsync("mypath");
+                await js.InvokeVoidAsync("eval", $"myelement = document.getElementById('Custom')");
+                await ctx.DrawFocusIfNeededAsync("myelement");
+                messages.Add("Added custom path");
+            }
             Messages = messages;
         }
     }
 }
+@using Microsoft.JSInterop 
+@inject IJSRuntime js;

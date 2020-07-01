@@ -19,7 +19,8 @@ namespace Excubo.Blazor.Canvas.Contexts
         protected ValueTask InvokeOnCtxAsync(string method_name, params object[] parameters) => js.InvokeVoidAsync(ctx + "." + method_name, parameters);
         protected ValueTask<T> InvokeOnCtxAsync<T>(string method_name, params object[] parameters) => js.InvokeAsync<T>(ctx + "." + method_name, parameters);
         protected ValueTask InvokeEvalAsync(string calculation) => js.InvokeVoidAsync("eval", $"{calculation}");
-        protected ValueTask InvokeEvalAsync(string field, string calculation) => js.InvokeVoidAsync("eval", $"{ctx}.{field} = {calculation}");
+        protected ValueTask<T> InvokeEvalAsync<T>(string calculation) => js.InvokeAsync<T>("eval", $"{calculation}");
+        private ValueTask InvokeEvalAsync(string field, string calculation) => js.InvokeVoidAsync("eval", $"{ctx}.{field} = {calculation}");
         protected ValueTask SetAsync(string field, string value) => InvokeEvalAsync(field, "\"" + value + "\"");
         protected ValueTask SetAsync(string field, bool value) => SetAsync(field, value.ToString());
         protected ValueTask SetAsync(string field, double value) => InvokeEvalAsync(field, value.ToInvariantString());
