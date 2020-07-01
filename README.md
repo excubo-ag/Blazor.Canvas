@@ -79,4 +79,4 @@ There's no need to load _any_ javascript to use this library.
 
 This is an early release of Excubo.Blazor.Canvas.
 
-Currently only the `'2d'` context is implemented. The other APIs are to follow.
+For the current implementation state, see [the projects overview](https://github.com/excubo-ag/Blazor.Canvas/projects/1)
