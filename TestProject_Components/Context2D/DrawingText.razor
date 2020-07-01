@@ -5,7 +5,7 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
 
 <h4>TODO</h4>
 
-<Canvas @ref="canvas" width="400px" height="400px" style="border: 5px solid red" />
+<Canvas @ref="canvas" width="400" height="400" style="border: 5px solid red" />
 
 <ol>
     @if (Messages != null)
@@ -20,26 +20,35 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
 @code {
     private Canvas canvas;
     private List<string> Messages = new List<string>();
+    private bool[] last_render = new bool[] { true };
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await UpdateCanvasAsync();
+        var current_state = new bool[] { };
+        if (!current_state.SequenceEqual(last_render))
+        {
+            last_render = current_state;
+            await UpdateCanvasAsync();
+        }
         await base.OnAfterRenderAsync(firstRender);
     }
     private async Task UpdateCanvasAsync()
     {
-        var messages = new List<string>();
+        Messages.Clear();
         await using (var ctx = await canvas.GetContext2DAsync())
         {
             await ctx.ClearRectAsync(0, 0, 400, 400);
             await ctx.SetTransformAsync(1, 0, 0, 1, 0, 0);
             await ctx.RestoreAsync();
             await ctx.SaveAsync();
-            messages.Add("Cleared");
+            Messages.Add("Cleared");
             await ctx.FillTextAsync("Hello", 0, 100);
-            messages.Add("Wrote hello");
+            Messages.Add("Wrote hello");
             await ctx.FillTextAsync("canvas", 100, 10);
-            messages.Add("Wrote canvas");
-            Messages = messages;
+            Messages.Add("Wrote canvas");
+            var measurement = await ctx.MeasureTextAsync("Hello canvas");
+            Messages.Add($"Measured \"Hello canvas\": {measurement}");
+            Messages = Messages.ToList();
+            await InvokeAsync(StateHasChanged);
         }
     }
 }

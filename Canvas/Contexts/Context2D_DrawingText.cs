@@ -43,6 +43,6 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public ValueTask<object> MeasureTextAsync(string text) => InvokeOnCtxAsync<object>("measureText", text);
+        public ValueTask<TextMetrics> MeasureTextAsync(string text) => InvokeOnCtxAsync<TextMetrics>("measureText", text);
     }
 }
