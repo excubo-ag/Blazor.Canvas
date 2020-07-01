@@ -52,13 +52,13 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// Returns the current line dash pattern array containing an even number of non-negative numbers.
         /// </summary>
         /// <returns>current value</returns>
-        public ValueTask<double[]> GetLineDashAsync() => InvokeAsync<double[]>(ctx + ".getLineDash");
+        public ValueTask<double[]> GetLineDashAsync() => InvokeOnCtxAsync<double[]>(ctx + ".getLineDash");
         /// <summary>
         /// Sets the current line dash pattern.
         /// </summary>
         /// <param name="segments"></param>
         /// <returns></returns>
-        public ValueTask SetLineDashAsync(double[] segments) => InvokeAsync("setLineDash", segments);
+        public ValueTask SetLineDashAsync(double[] segments) => InvokeOnCtxAsync("setLineDash", segments);
         /// <summary>
         /// Specifies where to start a dash array on a line.
         /// </summary>

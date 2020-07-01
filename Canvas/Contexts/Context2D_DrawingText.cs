@@ -11,7 +11,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public ValueTask FillTextAsync(string text, double x, double y) => InvokeAsync("fillText", text, x, y);
+        public ValueTask FillTextAsync(string text, double x, double y) => InvokeOnCtxAsync("fillText", text, x, y);
         /// <summary>
         /// Draws (fills) a given text at the given (x, y) position.
         /// </summary>
@@ -20,7 +20,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="y"></param>
         /// <param name="max_width"></param>
         /// <returns></returns>
-        public ValueTask FillTextAsync(string text, double x, double y, double max_width) => InvokeAsync("fillText", text, x, y, max_width);
+        public ValueTask FillTextAsync(string text, double x, double y, double max_width) => InvokeOnCtxAsync("fillText", text, x, y, max_width);
         /// <summary>
         /// Draws (strokes) a given text at the given (x, y) position.
         /// </summary>
@@ -28,7 +28,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public ValueTask StrokeTextAsync(string text, double x, double y) => InvokeAsync("strokeText", text, x, y);
+        public ValueTask StrokeTextAsync(string text, double x, double y) => InvokeOnCtxAsync("strokeText", text, x, y);
         /// <summary>
         /// Draws (strokes) a given text at the given (x, y) position.
         /// </summary>
@@ -37,12 +37,12 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="y"></param>
         /// <param name="max_width"></param>
         /// <returns></returns>
-        public ValueTask StrokeTextAsync(string text, double x, double y, double max_width) => InvokeAsync("strokeText", text, x, y, max_width);
+        public ValueTask StrokeTextAsync(string text, double x, double y, double max_width) => InvokeOnCtxAsync("strokeText", text, x, y, max_width);
         /// <summary>
         /// Returns a TextMetrics object.
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public ValueTask<object> MeasureTextAsync(string text) => InvokeAsync<object>("measureText", text);
+        public ValueTask<object> MeasureTextAsync(string text) => InvokeOnCtxAsync<object>("measureText", text);
     }
 }

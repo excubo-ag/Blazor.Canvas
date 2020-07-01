@@ -12,7 +12,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public ValueTask ClearRectAsync(double x, double y, double width, double height) => InvokeAsync("clearRect", x, y, width, height);
+        public ValueTask ClearRectAsync(double x, double y, double width, double height) => InvokeOnCtxAsync("clearRect", x, y, width, height);
         /// <summary>
         /// Draws a filled rectangle at (x, y) position whose size is determined by width and height.
         /// </summary>
@@ -21,7 +21,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public ValueTask FillRectAsync(double x, double y, double width, double height) => InvokeAsync("fillRect", x, y, width, height);
+        public ValueTask FillRectAsync(double x, double y, double width, double height) => InvokeOnCtxAsync("fillRect", x, y, width, height);
         /// <summary>
         /// Paints a rectangle which has a starting point at (x, y) and has a w width and an h height onto the canvas, using the current stroke style.
         /// </summary>
@@ -30,6 +30,6 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public ValueTask StrokeRectAsync(double x, double y, double width, double height) => InvokeAsync("strokeRect", x, y, width, height);
+        public ValueTask StrokeRectAsync(double x, double y, double width, double height) => InvokeOnCtxAsync("strokeRect", x, y, width, height);
     }
 }
