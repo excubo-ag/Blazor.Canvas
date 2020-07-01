@@ -35,7 +35,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="pattern"></param>
         private void FillStyleAsync(object pattern)
         {
-            //TODO
+            //TODO FillStyleAsync
         }
         /// <summary>
         /// Color or style to use for the lines around shapes. Default #000 (black).
@@ -67,7 +67,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="pattern"></param>
         private void StrokeStyleAsync(object pattern)
         {
-            //TODO
+            //TODO StrokeStyleAsync
         }
         // gradients and patterns:
         // no API call here, as the APIs are merged with the FillStyle / StrokeStyle APIs.

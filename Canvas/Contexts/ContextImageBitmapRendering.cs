@@ -16,7 +16,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext/transferFromImageBitmap.")]
         private void transferFromImageBitmap(object bitmap)
         {
-            //TODO
+            //TODO transferFromImageBitmap
         }
     }
 }

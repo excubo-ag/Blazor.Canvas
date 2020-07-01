@@ -1,7 +1,7 @@
 ﻿@page "/2D/Transformations"
 <h3>Transformations</h3>
 
-<Canvas @ref="canvas" width="400px" height="400px" style="border: 5px solid red" />
+<Canvas @ref="canvas" width="400" height="400" style="border: 5px solid red" />
 <ul>
     <li>
         <label for="rotate">Rotate</label>
@@ -80,7 +80,9 @@
             {
                 if (CurrentTransform)
                 {
+#pragma warning disable CS0618 // Type or member is obsolete
                     var current = await ctx.CurrentTransformAsync();
+#pragma warning restore CS0618 // Type or member is obsolete
                     Messages.Add($"Retrieved current transform: {current}");
                     await ctx.CurrentTransformAsync(current);
                     Messages.Add("Set current transform");

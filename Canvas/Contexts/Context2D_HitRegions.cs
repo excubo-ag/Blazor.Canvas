@@ -14,7 +14,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.")]
         private void addHitRegion()
         {
-            // TODO
+            // TODO addHitRegion
         }
         /// <summary>
         /// Removes the hit region with the specified id from the canvas.
@@ -26,7 +26,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.")]
         private void removeHitRegion()
         {
-            // TODO
+            // TODO removeHitRegion
         }
         /// <summary>
         /// Removes all hit regions from the canvas.
@@ -38,7 +38,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.")]
         private void clearHitRegions()
         {
-            // TODO
+            // TODO clearHitRegions
         }
     }
 }

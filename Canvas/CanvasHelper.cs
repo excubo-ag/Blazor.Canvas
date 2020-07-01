@@ -3,7 +3,6 @@ using Excubo.Blazor.Canvas.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas
@@ -16,13 +15,6 @@ namespace Excubo.Blazor.Canvas
             var (context_id, command) = BuildEvalCommand(canvas, "2d", arguments);
             await js.InvokeVoidAsync("eval", command);
             return new Context2D(context_id, js);
-        }
-        private static string PrepareArguments(bool alpha, bool desynchronized)
-        {
-            return $@"{{
-              alpha: {alpha.ToString().ToLowerInvariant()},
-              desynchronized: {desynchronized.ToString().ToLowerInvariant()}
-            }}";
         }
         [Obsolete("Sorry, not yet implemented")]
         public static async Task<ContextImageBitmapRendering> GetContextImageBitmapRenderingAsync(this IJSRuntime js, ElementReference canvas)
@@ -44,6 +36,21 @@ namespace Excubo.Blazor.Canvas
             await js.InvokeVoidAsync("eval", command);
             return new ContextWebGL(context_id, js);
         }
+        [Obsolete("Sorry, not yet implemented")]
+        public static async Task<ContextWebGL2> GetContextWebGL2Async(this IJSRuntime js, ElementReference canvas)
+        {
+            throw new NotImplementedException("Sorry, not yet implemented");
+            var (context_id, command) = BuildEvalCommand(canvas, "webgl2");
+            await js.InvokeVoidAsync("eval", command);
+            return new ContextWebGL2(context_id, js);
+        }
+        private static string PrepareArguments(bool alpha, bool desynchronized)
+        {
+            return $@"{{
+              alpha: {alpha.ToString().ToLowerInvariant()},
+              desynchronized: {desynchronized.ToString().ToLowerInvariant()}
+            }}";
+        }
         private static string PrepareArguments(bool alpha, bool desynchronized, bool antialias, bool depth, bool fail_if_major_performance_caveat,
             PowerPreference power_preference, bool premultiplied_alpha, bool preserve_drawing_buffer, bool stencil)
         {
@@ -58,14 +65,6 @@ namespace Excubo.Blazor.Canvas
                 preserveDrawingBuffer: {preserve_drawing_buffer.ToString().ToLowerInvariant()},
                 stencil: {stencil.ToString().ToLowerInvariant()}
             }}";
-        }
-        [Obsolete("Sorry, not yet implemented")]
-        public static async Task<ContextWebGL2> GetContextWebGL2Async(this IJSRuntime js, ElementReference canvas)
-        {
-            throw new NotImplementedException("Sorry, not yet implemented");
-            var (context_id, command) = BuildEvalCommand(canvas, "webgl2");
-            await js.InvokeVoidAsync("eval", command);
-            return new ContextWebGL2(context_id, js);
         }
         private static (string Id, string Command) BuildEvalCommand(ElementReference canvas, string type, string arguments = null)
         {

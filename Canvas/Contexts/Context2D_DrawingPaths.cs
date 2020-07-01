@@ -19,7 +19,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="fill_rule"></param>
         private void FillAsync(object path, FillRule fill_rule)
         {
-            // TODO
+            // TODO FillAsync
         }
         /// <summary>
         /// Strokes the current sub-paths with the current stroke style.
@@ -33,7 +33,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <returns></returns>
         private void StrokeAsync(object path)
         {
-            // TODO
+            // TODO StrokeAsync
         }
         /// <summary>
         /// If a given element is focused, this method draws a focus ring around the current path.
@@ -41,7 +41,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="element"></param>
         private void drawFocusIfNeeded(object element)
         {
-            // TODO
+            // TODO drawFocusIfNeeded
         }
         /// <summary>
         /// If a given element is focused, this method draws a focus ring around the current path.
@@ -50,7 +50,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="element"></param>
         private void drawFocusIfNeeded(object path, object element)
         {
-            // TODO
+            // TODO drawFocusIfNeeded
         }
         /// <summary>
         /// Scrolls the current path or a given path into the view.
@@ -60,9 +60,9 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <returns></returns>
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.")]
         /// </summary>
-        private void scrillPathIntoView()
+        private void scrollPathIntoView()
         {
-            // TODO
+            // TODO scrollPathIntoView
         }
         /// <summary>
         /// Scrolls the current path or a given path into the view.
@@ -71,9 +71,9 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <returns></returns>
         [Obsolete("Experimental method. Use at own risk. See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/resetTransform.")]
-        private void scrillPathIntoView(object path)
+        private void scrollPathIntoView(object path)
         {
-            // TODO
+            // TODO scrollPathIntoView
         }
         /// <summary>
         /// Creates a clipping path from the current sub-paths. Everything drawn after clip() is called appears inside the clipping path only. For an example, see Clipping paths in the Canvas tutorial.
@@ -88,7 +88,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="fill_rule"></param>
         private void clip(object path, FillRule fill_rule)
         {
-            //TODO
+            //TODO clip
         }
         /// <summary>
         /// Reports whether or not the specified point is contained in the current path.
@@ -107,7 +107,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="fill_rule"></param>
         private void isPointInPath(object path, double x, double y, FillRule fill_rule)
         {
-            //TODO
+            //TODO isPointInPath
         }
         /// <summary>
         /// Reports whether or not the specified point is inside the area contained by the stroking of a path.
@@ -124,7 +124,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="y"></param>
         private void isPointInStroke(object path, double x, double y)
         {
-            //TODO
+            //TODO isPointInStroke
         }
     }
 }
