@@ -2,14 +2,14 @@
 
 @using Excubo.Blazor.Canvas
 
-<Canvas @ref="helper_canvas" width="150px" height="300px" />
+<Canvas @ref="helper_canvas" width="150" height="300" />
 <!--OR-->
 @inject Microsoft.JSInterop.IJSRuntime js;
-<canvas @ref="normal_canvas" width="600px" height="300px"></canvas>
+<canvas @ref="normal_canvas" width="600" height="300"></canvas>
 
 <hr/>
 
-<a href="2D"><Canvas @ref="Canvas2D" width="240px" height="125px" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="2D"><Canvas @ref="Canvas2D" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 @code {
     private Canvas helper_canvas;
     private ElementReference normal_canvas;
