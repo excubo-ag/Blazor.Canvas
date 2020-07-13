@@ -39,7 +39,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public ValueTask PutImageDataAsync(string id, double dx, double dy) => InvokeEvalAsync($"image_data = window.{id}; {ctx}.putImageData(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()})");
+        public ValueTask PutImageDataAsync(string id, double dx, double dy) => InvokeEvalAsync($"let image_data = window.{id}; {ctx}.putImageData(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()})");
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap. Only the pixels from the dirty rectangle are painted.
         /// </summary>
@@ -51,6 +51,6 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dirty_width"></param>
         /// <param name="dirty_height"></param>
         /// <returns></returns>
-        public ValueTask PutImageDataAsync(string id, double dx, double dy, double dirty_x, double dirty_y, double dirty_width, double dirty_height) => InvokeEvalAsync($"image_data = window.{id}; {ctx}.putImageData(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()}, {dirty_x.ToInvariantString()}, {dirty_y.ToInvariantString()}, {dirty_width.ToInvariantString()}, {dirty_height.ToInvariantString()})");
+        public ValueTask PutImageDataAsync(string id, double dx, double dy, double dirty_x, double dirty_y, double dirty_width, double dirty_height) => InvokeEvalAsync($"let image_data = window.{id}; {ctx}.putImageData(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()}, {dirty_x.ToInvariantString()}, {dirty_y.ToInvariantString()}, {dirty_width.ToInvariantString()}, {dirty_height.ToInvariantString()})");
     }
 }
