@@ -17,17 +17,17 @@ Excubo.Blazor.Canvas is distributed [via nuget.org](https://www.nuget.org/packag
 
 #### Package Manager:
 ```ps
-Install-Package Excubo.Blazor.Canvas -Version 0.9.0
+Install-Package Excubo.Blazor.Canvas -Version 1.0.0
 ```
 
 #### .NET Cli:
 ```cmd
-dotnet add package Excubo.Blazor.Canvas --version 0.9.0
+dotnet add package Excubo.Blazor.Canvas --version 1.0.0
 ```
 
 #### Package Reference
 ```xml
-<PackageReference Include="Excubo.Blazor.Canvas" Version="0.9.0" />
+<PackageReference Include="Excubo.Blazor.Canvas" Version="1.0.0" />
 ```
 
 ### 2. Use a `canvas`, or the helper component `Canvas`
@@ -63,7 +63,7 @@ dotnet add package Excubo.Blazor.Canvas --version 0.9.0
 }
 ```
 
-Have a look at the fully working examples provided in [the sample project](https://github.com/excubo-ag/Blazor.Canvas/tree/master/TestProject_Components).
+Have a look at the fully working examples provided in [the sample project](https://github.com/excubo-ag/Blazor.Canvas/tree/master/TestProject_Components). A demo is available [here](https://excubo-ag.github.io/Blazor.Canvas/).
 
 ## Design principles
 
@@ -76,7 +76,5 @@ Users get a type-safe API that is fully compatible with the canvas API.
 There's no need to load _any_ javascript to use this library.
 
 ## Roadmap
-
-This is an early release of Excubo.Blazor.Canvas.
 
 For the current implementation state, see [the projects overview](https://github.com/excubo-ag/Blazor.Canvas/projects/)
