@@ -27,4 +27,19 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <returns>current value</returns>
         public ValueTask<ImageSmoothingQuality> ImageSmoothingQualityAsync() => GetAsync<ImageSmoothingQuality>("imageSmoothingQuality");
     }
+    public partial class Batch2D
+    {
+        /// <summary>
+        /// Image smoothing mode; if disabled, images will not be smoothed if scaled.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ValueTask ImageSmoothingEnabledAsync(bool value) => SetAsync("imageSmoothingEnabled", value);
+        /// <summary>
+        /// Allows you to set the quality of image smoothing.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ValueTask ImageSmoothingQualityAsync(ImageSmoothingQuality value) => SetAsync("imageSmoothingQuality", value);
+    }
 }

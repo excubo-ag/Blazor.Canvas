@@ -10,7 +10,7 @@ namespace Excubo.Blazor.Canvas.Contexts
     public class Context : IAsyncDisposable
     {
         protected readonly string ctx;
-        private readonly IJSRuntime js;
+        protected readonly IJSRuntime js;
         public Context(string ctx, IJSRuntime js)
         {
             this.ctx = ctx;
@@ -24,14 +24,11 @@ namespace Excubo.Blazor.Canvas.Contexts
         protected ValueTask SetAsync(string field, string value) => InvokeEvalAsync(field, "\"" + value + "\"");
         protected ValueTask SetAsync(string field, bool value) => SetAsync(field, value.ToString());
         protected ValueTask SetAsync(string field, double value) => InvokeEvalAsync(field, value.ToInvariantString());
-        [Obsolete("obj parameter type is not meant for long-term. Replace ASAP")]
-        protected ValueTask SetAsync(string field, object value) => InvokeEvalAsync(field, JsonSerializer.Serialize(value));
+        protected ValueTask SetAsync(string field, DOMMatrix value) => InvokeEvalAsync(field, JsonSerializer.Serialize(value));
         protected ValueTask SetAsync<TEnum>(string field, TEnum value) where TEnum : Enum => SetAsync(field, value.ToJsEnumValue());
         protected ValueTask<string> GetStringAsync(string field) => js.InvokeAsync<string>("eval", ctx + "." + field);
         protected ValueTask<bool> GetBoolAsync(string field) => js.InvokeAsync<bool>("eval", ctx + "." + field);
         protected ValueTask<double> GetDoubleAsync(string field) => js.InvokeAsync<double>("eval", ctx + "." + field);
-        [Obsolete("obj parameter type is not meant for long-term. Replace ASAP")]
-        protected ValueTask<object> GetObjectAsync(string field) => js.InvokeAsync<object>("eval", ctx + "." + field);
         protected ValueTask<T> GetObjectAsync<T>(string field) => js.InvokeAsync<T>("eval", ctx + "." + field);
         protected async ValueTask<TEnum> GetAsync<TEnum>(string field) where TEnum : Enum
         {

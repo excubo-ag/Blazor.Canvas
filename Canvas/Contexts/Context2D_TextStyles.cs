@@ -49,4 +49,31 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <returns>current value</returns>
         public ValueTask<Direction> DirectionAsync() => GetAsync<Direction>("direction");
     }
+    public partial class Batch2D
+    {
+        /// <summary>
+        /// Font setting. Default value 10px sans-serif.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ValueTask FontAsync(string value) => SetAsync("font", value);
+        /// <summary>
+        /// Text alignment setting. Possible values: start (default), end, left, right, center.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ValueTask TextAlignAsync(TextAlign value) => SetAsync("textAlign", value);
+        /// <summary>
+        /// Baseline alignment setting. Possible values: top, hanging, middle, alphabetic (default), ideographic, bottom.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ValueTask TextBaseLineAsync(TextBaseLine value) => SetAsync("textBaseLine", value);
+        /// <summary>
+        /// Directionality. Possible values: ltr, rtl, inherit (default).
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ValueTask DirectionAsync(Direction value) => SetAsync("direction", value);
+    }
 }

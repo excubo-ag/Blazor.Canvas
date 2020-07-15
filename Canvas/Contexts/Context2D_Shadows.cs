@@ -49,4 +49,31 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <returns>current value</returns>
         public ValueTask<double> ShadowOffsetYAsync() => GetDoubleAsync("shadowOffsetY");
     }
+    public partial class Batch2D
+    {
+        /// <summary>
+        /// Specifies the blurring effect. Default: 0
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public ValueTask ShadowBlurAsync(double level) => SetAsync("shadowBlur", level);
+        /// <summary>
+        /// Color of the shadow. Default: fully-transparent black.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public ValueTask ShadowColorAsync(string color) => SetAsync("shadowColor", color);
+        /// <summary>
+        /// Horizontal distance the shadow will be offset. Default: 0.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public ValueTask ShadowOffsetXAsync(double offset) => SetAsync("shadowOffsetX", offset);
+        /// <summary>
+        /// Vertical distance the shadow will be offset. Default: 0.
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public ValueTask ShadowOffsetYAsync(double offset) => SetAsync("shadowOffsetY", offset);
+    }
 }
