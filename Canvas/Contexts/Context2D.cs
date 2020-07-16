@@ -11,7 +11,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         internal Context2D(string ctx, IJSRuntime js) : base(ctx, js) { }
         public async Task<Batch2D> CreateBatchAsync()
         {
-            await js.InvokeVoidAsync("eval", "window.Excubo=window.Excubo||{};window.Excubo.Canvas=window.Excubo.Canvas||{batch:(n,t)=>{n=window[`${n}`];for(let i of t)switch(i.t){case\"S\":n[i.i]=i.v;break;case\"I\":i.v==undefined?n[i.i]():Array.isArray(i.v)?n[i.i](...i.v):n[i.i](i.v);break;case\"C\":d=n=>{let t=window;for(const n of n.split(\".\"))t=t[n];return t};i.o2==undefined?i.v==undefined?n[i.i](d(i.o1)):Array.isArray(i.v)?n[i.i](d(i.o1),...i.v):n[i.i](d(i.o1),i.v):i.v==undefined?n[i.i](d(i.o1),d(i.o2)):Array.isArray(i.v)?n[i.i](d(i.o1),d(i.o2),...i.v):n[i.i](d(i.o1),d(i.o2),i.v)}}};");
+            await js.InvokeVoidAsync("eval", "window.Excubo=window.Excubo||{};window.Excubo.Canvas=window.Excubo.Canvas||{batch:(n,t)=>{n=window[`${n}`];d=n=>{let t=window;for(let e of n.split(\".\"))t=t[e];return t};for(let i of t)switch(i.t){case\"S\":n[i.i]=i.v;break;case\"G\":if(i.o1==\"P\")n[i.i]=n.createPattern(d(i.o2),i.v);else{let t=n[`create${i.o1=='L'?\"Linear\":\"Radial\"}Gradient`](...i.v);for(let n of i.o2)t.addColorStop(n.offset,n.color);n[i.i]=t}break;case\"I\":i.v==undefined?n[i.i]():Array.isArray(i.v)?n[i.i](...i.v):n[i.i](i.v);break;case\"C\":i.o2==undefined?i.v==undefined?n[i.i](d(i.o1)):Array.isArray(i.v)?n[i.i](d(i.o1),...i.v):n[i.i](d(i.o1),i.v):i.v==undefined?n[i.i](d(i.o1),d(i.o2)):Array.isArray(i.v)?n[i.i](d(i.o1),d(i.o2),...i.v):n[i.i](d(i.o1),d(i.o2),i.v)}}};");
             return new Batch2D(ctx, js);
         }
     }
@@ -77,10 +77,23 @@ namespace Excubo.Blazor.Canvas.Contexts
         {
             operations.Add(new Operation { Type = OperationType.Complex, Identifier = identifier, Object1 = object1, Object2 = object2, Value = values });
         }
-        [Obsolete]
-        private async ValueTask InvokeEvalAsync(string v)
+        private enum Gradient
         {
-            // TODO
+            Linear,
+            Radial
+        }
+        private class ColorStop
+        {
+            public double Offset { get; set; }
+            public string Color { get; set; }
+        }
+        private async ValueTask GradientAsync(string identifier, Gradient gradient, ColorStop[] color_stops, params double[] values)
+        {
+            operations.Add(new Operation { Type = OperationType.GradientOrPattern, Identifier = identifier, Object1 = gradient == Gradient.Linear ? "L" : "R", Object2 = color_stops, Value = values });
+        }
+        private async ValueTask PatternAsync(string identifier, string image, string value)
+        {
+            operations.Add(new Operation { Type = OperationType.GradientOrPattern, Identifier = identifier, Object1 = "P", Object2 = image, Value = value });
         }
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     }

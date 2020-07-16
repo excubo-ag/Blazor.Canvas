@@ -7,14 +7,15 @@ namespace Excubo.Blazor.Canvas.Contexts
         Set,
         Invocation,
         Complex,
+        GradientOrPattern,
     }
     internal class Operation
     {
-        public string T => Type switch { OperationType.Set => "S", OperationType.Invocation => "I", OperationType.Complex => "C" };
+        public string T => Type switch { OperationType.Set => "S", OperationType.Invocation => "I", OperationType.Complex => "C", OperationType.GradientOrPattern => "G" };
         public string I => Identifier;
         public object V => Value;
         public string O1 => Object1;
-        public string O2 => Object2;
+        public object O2 => Object2;
         [JsonIgnore]
         internal OperationType Type { private get; set; }
         [JsonIgnore]
@@ -24,6 +25,6 @@ namespace Excubo.Blazor.Canvas.Contexts
         [JsonIgnore]
         internal string Object1 { private get; set; }
         [JsonIgnore]
-        internal string Object2 { private get; set; }
+        internal object Object2 { private get; set; }
     }
 }
