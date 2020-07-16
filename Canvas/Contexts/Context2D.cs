@@ -11,7 +11,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         internal Context2D(string ctx, IJSRuntime js) : base(ctx, js) { }
         public async Task<Batch2D> CreateBatchAsync()
         {
-            await js.InvokeVoidAsync("eval", "window.Excubo=window.Excubo||{};window.Excubo.Canvas=window.Excubo.Canvas||{batch:(n,t)=>{n=window[`${n}`];for(let i of t)switch(i.t){case\"S\":n[i.i]=i.v;break;case\"I\":i.v==undefined?n[i.i]():n[i.i](...i.v);break;case\"C\":d=n=>{let t=window;for(const e of n.split(\".\"))t=t[e];return t};i.o2==undefined?n[i.i](d(i.o1),...i.v):n[i.i](d(i.o1),d(i.o2),...i.v)}}};");
+            await js.InvokeVoidAsync("eval", "window.Excubo=window.Excubo||{};window.Excubo.Canvas=window.Excubo.Canvas||{batch:(n,t)=>{n=window[`${n}`];for(let i of t)switch(i.t){case\"S\":n[i.i]=i.v;break;case\"I\":i.v==undefined?n[i.i]():Array.isArray(i.v)?n[i.i](...i.v):n[i.i](i.v);break;case\"C\":d=n=>{let t=window;for(const n of n.split(\".\"))t=t[n];return t};i.o2==undefined?i.v==undefined?n[i.i](d(i.o1)):Array.isArray(i.v)?n[i.i](d(i.o1),...i.v):n[i.i](d(i.o1),i.v):i.v==undefined?n[i.i](d(i.o1),d(i.o2)):Array.isArray(i.v)?n[i.i](d(i.o1),d(i.o2),...i.v):n[i.i](d(i.o1),d(i.o2),i.v)}}};");
             return new Batch2D(ctx, js);
         }
     }

@@ -10,8 +10,10 @@ window.Excubo.Canvas = window.Excubo.Canvas || {
                 case 'I':
                     if (op.v == undefined) {
                         ctx[op.i]();
-                    } else {
+                    } else if (Array.isArray(op.v)) {
                         ctx[op.i](...op.v);
+                    } else {
+                        ctx[op.i](op.v);
                     }
                     break;
                 case 'C':
@@ -23,9 +25,21 @@ window.Excubo.Canvas = window.Excubo.Canvas || {
                         return o1;
                     }
                     if (op.o2 == undefined) {
-                        ctx[op.i](d(op.o1), ...op.v);
+                        if (op.v == undefined) {
+                            ctx[op.i](d(op.o1));
+                        } else if (Array.isArray(op.v)) {
+                            ctx[op.i](d(op.o1), ...op.v);
+                        } else {
+                            ctx[op.i](d(op.o1), op.v);
+                        }
                     } else {
-                        ctx[op.i](d(op.o1), d(op.o2), ...op.v);
+                        if (op.v == undefined) {
+                            ctx[op.i](d(op.o1), d(op.o2));
+                        } else if (Array.isArray(op.v)) {
+                            ctx[op.i](d(op.o1), d(op.o2), ...op.v);
+                        } else {
+                            ctx[op.i](d(op.o1), d(op.o2), op.v);
+                        }
                     }
                     break;
             }
