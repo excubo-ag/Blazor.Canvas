@@ -13,6 +13,6 @@
         public double emHeightDescent { get; set; }
         public double hangingBaseline { get; set; }
         public double alphabeticBaseline { get; set; }
-        public double ideographicBaseline { get; set; } 
+        public double ideographicBaseline { get; set; }
     }
 }
