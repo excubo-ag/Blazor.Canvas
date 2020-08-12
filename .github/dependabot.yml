@@ -8,16 +8,16 @@ updates:
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/Canvas" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/TestProject_Components" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/TestProject_ClientSide" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/TestProject_ServerSide" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
