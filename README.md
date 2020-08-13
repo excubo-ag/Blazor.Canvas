@@ -63,7 +63,7 @@ dotnet add package Excubo.Blazor.Canvas --version 1.2.1
 }
 ```
 
-Have a look at the fully working examples provided in [the sample project](https://github.com/excubo-ag/Blazor.Canvas/tree/master/TestProject_Components). A demo is available [here](https://excubo-ag.github.io/Blazor.Canvas/).
+Have a look at the fully working examples provided in [the sample project](https://github.com/excubo-ag/Blazor.Canvas/tree/main/TestProject_Components). A demo is available [here](https://excubo-ag.github.io/Blazor.Canvas/).
 
 ## Design principles
 
