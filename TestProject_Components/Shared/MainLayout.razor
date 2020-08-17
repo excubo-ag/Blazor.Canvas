@@ -1,13 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
-<div style="display:grid; grid-template-columns: 16vw 84vw; height: 100%">
-    <div style="grid-column: 1">
+<Grid style="height: 100%">
+    <ColumnDefinition Width="minmax(15em, 10%)" />
+    <ColumnDefinition Width="auto" />
+    <Element Column="0" style="background-image: linear-gradient(180deg, #26508E 0%, #117FBD 70%); padding: 1em;">
         <NavMenu />
-    </div>
-
-    <div style="grid-column: 2; padding:2em; background-color:aliceblue">
-        <div style="background-color:white; height: 100%">
-            @Body
-        </div>
-    </div>
-</div>
+    </Element>
+    <Element Column="1" style="padding: 2em; overflow-y: auto; height: 100%;">
+        @Body
+    </Element>
+</Grid>

@@ -2,12 +2,18 @@
 
 @using Excubo.Blazor.Canvas
 
+<h4>Blazor.Canvas</h4>
+
+... is a Blazor library for the HTML canvas API.
+<br />
+excubo-ag also develops other libraries and tools. Have a look at <a href="https://excubo-ag.github.io/">excubo-ag.github.io</a>.
+
 <Canvas @ref="helper_canvas" width="150" height="300" />
 <!--OR-->
 @inject Microsoft.JSInterop.IJSRuntime js;
 <canvas @ref="normal_canvas" width="600" height="300"></canvas>
 
-<hr/>
+<hr />
 
 <a href="2D"><Canvas @ref="Canvas2D" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 @code {

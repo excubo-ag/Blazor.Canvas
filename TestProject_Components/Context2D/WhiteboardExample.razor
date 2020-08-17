@@ -42,7 +42,7 @@
             await ctx1.LineJoinAsync(LineJoin.Round);
             await ctx1.LineCapAsync(LineCap.Round);
             // this retrieves the top left corner of the canvas container (which is equivalent to the top left corner of the canvas, as we don't have any margins / padding)
-            var p = await js.InvokeAsync<Position>("eval", $"let e = document.querySelector('[_bl_{container.Id}=\"\"]'); let r = {{ 'Left': e.offsetLeft, 'Top': e.offsetTop }}; r");
+            var p = await js.InvokeAsync<Position>("eval", $"let e = document.querySelector('[_bl_{container.Id}=\"\"]'); e = e.getBoundingClientRect(); e = {{ 'Left': e.x, 'Top': e.y }}; e");
             (canvasx, canvasy) = (p.Left, p.Top);
         }
     }
