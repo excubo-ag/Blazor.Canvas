@@ -1,8 +1,8 @@
 ## Excubo.Blazor.Canvas
 
-![Nuget](https://img.shields.io/nuget/v/Excubo.Blazor.Canvas)
-![Nuget](https://img.shields.io/nuget/dt/Excubo.Blazor.Canvas)
-![GitHub](https://img.shields.io/github/license/excubo-ag/Blazor.Canvas)
+[![Nuget](https://img.shields.io/nuget/v/Excubo.Blazor.Canvas)](https://www.nuget.org/packages/Excubo.Blazor.Canvas/)
+[![Nuget](https://img.shields.io/nuget/dt/Excubo.Blazor.Canvas)](https://www.nuget.org/packages/Excubo.Blazor.Canvas/)
+[![GitHub](https://img.shields.io/github/license/excubo-ag/Blazor.Canvas)](https://github.com/excubo-ag/Blazor.Canvas)
 
 Excubo.Blazor.Canvas is wrapper library around the HTML canvas API. It is written purely in C# (i.e., there is absolutely no javascript code you need to add to your project).
 
@@ -13,7 +13,7 @@ Excubo.Blazor.Canvas is wrapper library around the HTML canvas API. It is writte
 ### 1. Install the nuget package Excubo.Blazor.Canvas
 
 Excubo.Blazor.Canvas is distributed [via nuget.org](https://www.nuget.org/packages/Excubo.Blazor.Canvas/).
-![Nuget](https://img.shields.io/nuget/v/Excubo.Blazor.Canvas)
+[![Nuget](https://img.shields.io/nuget/v/Excubo.Blazor.Canvas)](https://www.nuget.org/packages/Excubo.Blazor.Canvas/)
 
 #### Package Manager:
 ```ps
