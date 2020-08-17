@@ -1,0 +1,14 @@
+﻿@if (Repository != null && Page != null)
+{
+    <a href="@(Url)" target="_blank" style="position: fixed; top: 0.2em; right: 0.2em"><img src="https://img.shields.io/badge/source%20code%20for%20this%20page-@(Page)-green?logo=github" /></a>
+}
+
+@code {
+    [Parameter]
+    public string Repository { get; set; }
+    [Parameter]
+    public string Section { get; set; } = "Pages";
+    [Parameter]
+    public string Page { get; set; }
+    private string Url => $"https://github.com/excubo-ag/{Repository}/blob/main/TestProject_Components/{Section}/{Page}.razor";
+}
