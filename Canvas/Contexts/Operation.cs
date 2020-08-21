@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Excubo.Blazor.Canvas.Contexts
 {
@@ -11,7 +12,14 @@ namespace Excubo.Blazor.Canvas.Contexts
     }
     internal class Operation
     {
-        public string T => Type switch { OperationType.Set => "S", OperationType.Invocation => "I", OperationType.Complex => "C", OperationType.GradientOrPattern => "G" };
+        public string T => Type switch 
+        {
+            OperationType.Set => "S",
+            OperationType.Invocation => "I",
+            OperationType.Complex => "C",
+            OperationType.GradientOrPattern => "G", 
+            _ => throw new ArgumentException("Impossible situation. The OperationType cannot exist!") 
+        };
         public string I => Identifier;
         public object V => Value;
         public string O1 => Object1;
