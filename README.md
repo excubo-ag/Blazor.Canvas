@@ -17,17 +17,17 @@ Excubo.Blazor.Canvas is distributed [via nuget.org](https://www.nuget.org/packag
 
 #### Package Manager:
 ```ps
-Install-Package Excubo.Blazor.Canvas -Version 1.2.1
+Install-Package Excubo.Blazor.Canvas -Version 2.0.0
 ```
 
 #### .NET Cli:
 ```cmd
-dotnet add package Excubo.Blazor.Canvas --version 1.2.1
+dotnet add package Excubo.Blazor.Canvas --version 2.0.0
 ```
 
 #### Package Reference
 ```xml
-<PackageReference Include="Excubo.Blazor.Canvas" Version="1.2.1" />
+<PackageReference Include="Excubo.Blazor.Canvas" Version="2.0.0" />
 ```
 
 ### 2. Use a `canvas`, or the helper component `Canvas`
@@ -64,6 +64,51 @@ dotnet add package Excubo.Blazor.Canvas --version 1.2.1
 ```
 
 Have a look at the fully working examples provided in [the sample project](https://github.com/excubo-ag/Blazor.Canvas/tree/main/TestProject_Components). A demo is available [here](https://excubo-ag.github.io/Blazor.Canvas/).
+
+## JS naming convention
+
+You want to use the canvas API in C# and use the same method names as you would in javascript? No problem! Starting with v2.0.0 of Excubo.Blazor.Canvas, you can write `context.JS` instead of `context` and you'll have what you're used to.
+Note that this is only a different name. The cost of the method calls are still the same and every call is still async and therefore should be awaited.
+
+```cs
+// C# naming convention
+await using (var ctx = await helper_canvas.GetContext2DAsync())
+{
+    await ctx.FontAsync("48px solid");
+    await ctx.FillTextAsync("Hello", 0, 150);
+}
+// JS naming convention
+await using (var ctx = await helper_canvas.GetContext2DAsync())
+{
+    await ctx.JS.font("48px solid");
+    await ctx.JS.fillText("Hello", 0, 150);
+}
+```
+
+## Helper groups for API regions
+
+The HTML canvas API is a large collection of methods and fields. This sometimes makes it hard to find the right method for your task. In Excubo.Blazor.Canvas, the methods are additionally grouped into
+
+- Canvas state
+- Compositing
+- Drawing images
+- Drawing paths
+- Drawing rectangles
+- Drawing text
+- Fill and stroke styles
+- Filters
+- Image smoothing
+- Line styles
+- Paths
+- Pixel manipulation
+- Shadows
+- Text styles
+- Transformations
+
+You can make use of this by writing e.g. `await context.Shadows.BlurAsync(2.0); await context.CanvasState.SaveAsync();` instead of `await context.ShadowBlurAsync(2.0); await context.SaveAsync();`.
+This helps make the intent of the code clearer, and helps finding the right method quicker.
+
+Groups are a feature made possible by [Excubo.Generators.Grouping](https://github.com/excubo-ag/Generators.Grouping).
 
 ## Design principles
 

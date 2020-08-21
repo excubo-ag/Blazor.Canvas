@@ -1,0 +1,121 @@
+﻿@page "/2D/DrawingPaths"
+<SourceCodeLink Repository="Blazor.Canvas" Section="@nameof(Context2D)" Page="@nameof(DrawingPaths)" />
+<h3>DrawingPaths</h3>
+
+For more information, please visit <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/</a>.
+<hr />
+<Canvas @ref="canvas" width="400" height="400" style="border: 5px solid red" />
+<hr />
+<ul>
+    <li>
+        <label for="@nameof(Lines)">@nameof(Lines)</label>
+        <input id="@nameof(Lines)" type="checkbox" @bind-value="@Lines" />
+    </li>
+    <li>
+        <label for="@nameof(Ellipse)">@nameof(Ellipse)</label>
+        <input id="@nameof(Ellipse)" type="checkbox" @bind-value="@Ellipse" />
+    </li>
+    <li>
+        <label for="@nameof(Quadratic)">@nameof(Quadratic)</label>
+        <input id="@nameof(Quadratic)" type="checkbox" @bind-value="@Quadratic" />
+    </li>
+    <li>
+        <label for="@nameof(Bezier)">@nameof(Bezier)</label>
+        <input id="@nameof(Bezier)" type="checkbox" @bind-value="@Bezier" />
+    </li>
+    <li>
+        <label for="@nameof(Custom)">@nameof(Custom)</label>
+        <input id="@nameof(Custom)" type="checkbox" @bind-value="@Custom" />
+    </li>
+</ul>
+
+<ol>
+    @if (Messages != null)
+    {
+        foreach (var message in Messages)
+        {
+            <li>@message</li>
+        }
+    }
+</ol>
+
+@code {
+    private Canvas canvas;
+    private List<string> Messages = new List<string>();
+    private bool Lines { get; set; }
+    private bool Ellipse { get; set; }
+    private bool Quadratic { get; set; }
+    private bool Bezier { get; set; }
+    private bool Custom { get; set; }
+    private bool[] last_render = new bool[] { true, true, true, true, true };
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var current_state = new bool[] { Lines, Ellipse, Quadratic, Bezier, Custom };
+        if (!current_state.SequenceEqual(last_render))
+        {
+            last_render = current_state;
+            await UpdateCanvasAsync();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private async Task UpdateCanvasAsync()
+    {
+        Messages.Clear();
+        var messages = new List<string>();
+        await using (var ctx = await canvas.GetContext2DAsync())
+        {
+            await ctx.ClearRectAsync(0, 0, 400, 400);
+            await ctx.SetTransformAsync(1, 0, 0, 1, 0, 0);
+            await ctx.RestoreAsync();
+            await ctx.SaveAsync();
+            messages.Add("Cleared");
+            await ctx.FillTextAsync("Hello", 0, 100);
+            messages.Add("Wrote hello");
+            await ctx.FillTextAsync("canvas", 100, 10);
+            messages.Add("Wrote canvas");
+            if (Lines)
+            {
+                await ctx.MoveToAsync(100, 100);
+                await ctx.LineToAsync(100, 200);
+                await ctx.LineToAsync(200, 200);
+                await ctx.LineToAsync(200, 100);
+                await ctx.StrokeAsync();
+                messages.Add("Added lines");
+            }
+            if (Ellipse)
+            {
+                await ctx.BeginPathAsync();
+                await ctx.EllipseAsync(300, 200, 50, 20, 0, 0, 360);
+                await ctx.StrokeAsync();
+                messages.Add("Added ellipse curve");
+            }
+            if (Quadratic)
+            {
+                await ctx.BeginPathAsync();
+                await ctx.MoveToAsync(300, 50);
+                await ctx.QuadraticCurveToAsync(300, 100, 350, 100);
+                await ctx.StrokeAsync();
+                messages.Add("Added quadratic curve");
+            }
+            if (Bezier)
+            {
+                await ctx.BeginPathAsync();
+                await ctx.MoveToAsync(300, 250);
+                await ctx.BezierCurveToAsync(300, 300, 350, 300, 400, 400);
+                await ctx.StrokeAsync();
+                messages.Add("Added bezier curve");
+            }
+            if (Custom)
+            {
+                await js.InvokeVoidAsync("eval", $"mypath = new Path2D(); mypath.rect(10, 10, 100, 100);");
+                await ctx.StrokeAsync("mypath");
+                await js.InvokeVoidAsync("eval", $"myelement = document.getElementById('Custom')");
+                await ctx.DrawFocusIfNeededAsync("myelement");
+                messages.Add("Added custom path");
+            }
+            Messages = messages;
+        }
+    }
+}
+@using Microsoft.JSInterop
+@inject IJSRuntime js;

@@ -4,6 +4,8 @@
 
 <a href="2D/CanvasState"><Canvas @ref="CanvasState" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/Compositing"><Canvas @ref="Compositing" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="2D/DrawingImages"><Canvas @ref="DrawingImages" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="2D/DrawingPaths"><Canvas @ref="DrawingPaths" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/DrawingRectangles"><Canvas @ref="DrawingRectangles" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/DrawingText"><Canvas @ref="DrawingText" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/FillAndStrokeStyles"><Canvas @ref="FillAndStrokeStyles" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
@@ -11,19 +13,24 @@
 <a href="2D/ImageSmoothing"><Canvas @ref="ImageSmoothing" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/LineStyles"><Canvas @ref="LineStyles" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/Paths"><Canvas @ref="Paths" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="2D/PixelManipulation"><Canvas @ref="PixelManipulation" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/Shadows"><Canvas @ref="Shadows" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/TextStyles"><Canvas @ref="TextStyles" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <a href="2D/Transformations"><Canvas @ref="Transformations" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 <hr />
-Not yet implemented:
+Extra feature:
 <br />
-<a href="2D/DrawingImages"><Canvas @ref="DrawingImages" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
-<a href="2D/PixelManipulation"><Canvas @ref="PixelManipulation" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="2D/batching"><Canvas @ref="Batching" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<hr />
+Example applications:
+<br />
+<a href="2D/whiteboard"><Canvas @ref="Whiteboard" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 
 @code {
     private Canvas CanvasState;
     private Canvas Compositing;
     private Canvas DrawingImages;
+    private Canvas DrawingPaths;
     private Canvas DrawingRectangles;
     private Canvas DrawingText;
     private Canvas FillAndStrokeStyles;
@@ -35,6 +42,8 @@ Not yet implemented:
     private Canvas Shadows;
     private Canvas TextStyles;
     private Canvas Transformations;
+    private Canvas Batching;
+    private Canvas Whiteboard;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -68,6 +77,14 @@ Not yet implemented:
                 await ctx.FontAsync("24px sans-serif");
                 await ctx.TextAlignAsync(TextAlign.Center);
                 await ctx.FillTextAsync(nameof(DrawingImages), 120, 50);
+            }
+            await using (var ctx = await DrawingPaths.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(DrawingPaths), 120, 50);
+                await ctx.FillRectAsync(40, 60, 50, 50);
+                await ctx.StrokeRectAsync(110, 60, 50, 50);
             }
             await using (var ctx = await DrawingRectangles.GetContext2DAsync())
             {
@@ -168,6 +185,18 @@ Not yet implemented:
                 await ctx.TransformAsync(1, 0, 1.2, 1, 0, 0);
                 await ctx.FontAsync("12px sans-serif");
                 await ctx.FillTextAsync(nameof(Transformations), 0, 100);
+            }
+            await using (var ctx = await Batching.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Batching), 120, 50);
+            }
+            await using (var ctx = await Whiteboard.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Whiteboard), 120, 50);
             }
         }
         await base.OnAfterRenderAsync(firstRender);

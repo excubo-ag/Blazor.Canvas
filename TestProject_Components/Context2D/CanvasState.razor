@@ -46,7 +46,8 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
             await ctx.ClearRectAsync(0, 0, 400, 400);
             await ctx.SetTransformAsync(1, 0, 0, 1, 0, 0);
             await ctx.RestoreAsync();
-            await ctx.SaveAsync();
+            await ctx.JS.restore();
+            await ctx.JS.save();
             Messages.Add("Cleared");
             await ctx.SaveAsync();
             Messages.Add("State saved");

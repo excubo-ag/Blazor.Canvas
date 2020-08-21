@@ -1,4 +1,5 @@
 ﻿using Excubo.Blazor.Canvas.Extensions;
+using Excubo.Generators.Grouping;
 using System;
 using System.Threading.Tasks;
 
@@ -7,11 +8,16 @@ namespace Excubo.Blazor.Canvas.Contexts
     public partial class Context2D
     {
         /// <summary>
+        /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Pixel_manipulation" />
+        /// </summary>
+        public partial struct _PixelManipulation { }
+        /// <summary>
         /// Creates a new, blank ImageData object with the specified dimensions. All of the pixels in the new object are transparent black.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns>the name of the ImageData object</returns>
+        [Group(typeof(_JS), "createImageData"), Group(typeof(_PixelManipulation))]
         public async ValueTask<string> CreateImageDataAsync(double width, double height)
         {
             var id = "img_" + Guid.NewGuid().ToString().Replace('-', '_');
@@ -26,6 +32,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns>the name of the ImageData object</returns>
+        [Group(typeof(_JS), "getImageData"), Group(typeof(_PixelManipulation))]
         public async ValueTask<string> GetImageDataAsync(double x, double y, double width, double height)
         {
             var id = "img_" + Guid.NewGuid().ToString().Replace('-', '_');
@@ -39,6 +46,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
+        [Group(typeof(_JS), "putImageData"), Group(typeof(_PixelManipulation))]
         public ValueTask PutImageDataAsync(string id, double dx, double dy) => InvokeEvalAsync($"let image_data = window.{id}; {ctx}.putImageData(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()})");
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap. Only the pixels from the dirty rectangle are painted.
@@ -51,10 +59,15 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dirty_width"></param>
         /// <param name="dirty_height"></param>
         /// <returns></returns>
+        [Group(typeof(_JS), "putImageData"), Group(typeof(_PixelManipulation))]
         public ValueTask PutImageDataAsync(string id, double dx, double dy, double dirty_x, double dirty_y, double dirty_width, double dirty_height) => InvokeEvalAsync($"let image_data = window.{id}; {ctx}.putImageData(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()}, {dirty_x.ToInvariantString()}, {dirty_y.ToInvariantString()}, {dirty_width.ToInvariantString()}, {dirty_height.ToInvariantString()})");
     }
     public partial class Batch2D
     {
+        /// <summary>
+        /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Pixel_manipulation" />
+        /// </summary>
+        public partial struct _PixelManipulation { }
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap.
         /// </summary>
@@ -62,6 +75,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
+        [Group(typeof(_JS), "putImageData"), Group(typeof(_PixelManipulation))]
         public ValueTask PutImageDataAsync(string id, double dx, double dy) => InvokeEvalAsync("putImageData", id, dx, dy);
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap. Only the pixels from the dirty rectangle are painted.
@@ -74,6 +88,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dirty_width"></param>
         /// <param name="dirty_height"></param>
         /// <returns></returns>
+        [Group(typeof(_JS), "putImageData"), Group(typeof(_PixelManipulation))]
         public ValueTask PutImageDataAsync(string id, double dx, double dy, double dirty_x, double dirty_y, double dirty_width, double dirty_height) => InvokeEvalAsync("putImageData", id, dx, dy, dirty_x, dirty_y, dirty_width, dirty_height);
     }
 }
