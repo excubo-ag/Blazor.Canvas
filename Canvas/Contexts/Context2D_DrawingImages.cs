@@ -17,7 +17,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="dx">The x-axis coordinate in the destination canvas at which to place the top-left corner of the source image.</param>
         /// <param name="dy">The y-axis coordinate in the destination canvas at which to place the top-left corner of the source image.</param>
         /// <returns></returns>
-        [Group(typeof(_JS), "drawImage"), Group(typeof(_DrawingImages))] 
+        [Group(typeof(_JS), "drawImage"), Group(typeof(_DrawingImages))]
         public ValueTask DrawImageAsync(string image, double dx, double dy) => InvokeEvalAsync($"let image_data = {image}; {ctx}.drawImage(image_data, {dx.ToInvariantString()}, {dy.ToInvariantString()})");
         /// <summary>
         /// Draws the specified image. This method is available in multiple formats, providing a great deal of flexibility in its use.

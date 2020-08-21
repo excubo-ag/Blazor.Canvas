@@ -46,7 +46,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// Horizontal distance the shadow will be offset. Default: 0.
         /// </summary>
         /// <returns>current value</returns>
-        [Group(typeof(_JS), "shadowOffsetX"), Group(typeof(_Shadows),"OffsetXAsync")]
+        [Group(typeof(_JS), "shadowOffsetX"), Group(typeof(_Shadows), "OffsetXAsync")]
         public ValueTask<double> ShadowOffsetXAsync() => GetDoubleAsync("shadowOffsetX");
         /// <summary>
         /// Vertical distance the shadow will be offset. Default: 0.

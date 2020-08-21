@@ -14,7 +14,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [Group(typeof(_JS), "globalAlpha"), Group(typeof(_Compositing))] 
+        [Group(typeof(_JS), "globalAlpha"), Group(typeof(_Compositing))]
         public ValueTask GlobalAlphaAsync(double value) => SetAsync("globalAlpha", value);
         /// <summary>
         /// Alpha value that is applied to shapes and images before they are composited onto the canvas. Default 1.0 (opaque).
