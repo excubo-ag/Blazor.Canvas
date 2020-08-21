@@ -12,13 +12,13 @@ namespace Excubo.Blazor.Canvas.Contexts
     }
     internal class Operation
     {
-        public string T => Type switch 
+        public string T => Type switch
         {
             OperationType.Set => "S",
             OperationType.Invocation => "I",
             OperationType.Complex => "C",
-            OperationType.GradientOrPattern => "G", 
-            _ => throw new ArgumentException("Impossible situation. The OperationType cannot exist!") 
+            OperationType.GradientOrPattern => "G",
+            _ => throw new ArgumentException("Impossible situation. The OperationType cannot exist!")
         };
         public string I => Identifier;
         public object V => Value;
