@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Image_smoothing" />
         /// </summary>
-        public partial struct _ImageSmoothing { }
+        public partial struct _ImageSmoothing : IContext2DWithoutGetters.I_ImageSmoothing { }
         /// <summary>
         /// Image smoothing mode; if disabled, images will not be smoothed if scaled.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Image_smoothing" />
         /// </summary>
-        public partial struct _ImageSmoothing { }
+        public partial struct _ImageSmoothing : IContext2DWithoutGetters.I_ImageSmoothing { }
         /// <summary>
         /// Image smoothing mode; if disabled, images will not be smoothed if scaled.
         /// </summary>

@@ -10,7 +10,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Fill_and_stroke_styles" />
         /// </summary>
-        public partial struct _FillAndStrokeStyles { }
+        public partial struct _FillAndStrokeStyles : IContext2DWithoutGetters.I_FillAndStrokeStyles { }
         /// <summary>
         /// Color or style to use inside shapes. Default #000 (black).
         /// </summary>
@@ -101,7 +101,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Fill_and_stroke_styles" />
         /// </summary>
-        public partial struct _FillAndStrokeStyles { }
+        public partial struct _FillAndStrokeStyles : IContext2DWithoutGetters.I_FillAndStrokeStyles { }
         /// <summary>
         /// Color or style to use inside shapes. Default #000 (black).
         /// </summary>

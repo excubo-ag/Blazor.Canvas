@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Paths" />
         /// </summary>
-        public partial struct _Paths { }
+        public partial struct _Paths : IContext2DWithoutGetters.I_Paths { }
         /// <summary>
         /// Starts a new path by emptying the list of sub-paths. Call this method when you want to create a new path.
         /// </summary>
@@ -136,7 +136,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Paths" />
         /// </summary>
-        public partial struct _Paths { }
+        public partial struct _Paths : IContext2DWithoutGetters.I_Paths { }
         /// <summary>
         /// Starts a new path by emptying the list of sub-paths. Call this method when you want to create a new path.
         /// </summary>

@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Drawing_text" />
         /// </summary>
-        public partial struct _DrawingText { }
+        public partial struct _DrawingText : IContext2DWithoutGetters.I_DrawingText { }
         /// <summary>
         /// Draws (fills) a given text at the given (x, y) position.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Drawing_text" />
         /// </summary>
-        public partial struct _DrawingText { }
+        public partial struct _DrawingText : IContext2DWithoutGetters.I_DrawingText { }
         /// <summary>
         /// Draws (fills) a given text at the given (x, y) position.
         /// </summary>

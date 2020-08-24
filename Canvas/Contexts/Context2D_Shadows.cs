@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Shadows" />
         /// </summary>
-        public partial struct _Shadows { }
+        public partial struct _Shadows : IContext2DWithoutGetters.I_Shadows { }
         /// <summary>
         /// Specifies the blurring effect. Default: 0
         /// </summary>
@@ -67,7 +67,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Shadows" />
         /// </summary>
-        public partial struct _Shadows { }
+        public partial struct _Shadows : IContext2DWithoutGetters.I_Shadows { }
         /// <summary>
         /// Specifies the blurring effect. Default: 0
         /// </summary>

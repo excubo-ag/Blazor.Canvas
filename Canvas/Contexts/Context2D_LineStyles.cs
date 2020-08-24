@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Line_styles" />
         /// </summary>
-        public partial struct _LineStyles { }
+        public partial struct _LineStyles : IContext2DWithoutGetters.I_LineStyles { }
         /// <summary>
         /// Width of lines. Default 1.0.
         /// </summary>
@@ -93,7 +93,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Line_styles" />
         /// </summary>
-        public partial struct _LineStyles { }
+        public partial struct _LineStyles : IContext2DWithoutGetters.I_LineStyles { }
         /// <summary>
         /// Width of lines. Default 1.0.
         /// </summary>

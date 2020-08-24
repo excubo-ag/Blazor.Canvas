@@ -11,7 +11,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// If you are used to the javascript naming convention and want to use it in C# too, use context.<see cref="JS"/> instead of context.
         /// </summary>
-        public partial struct _JS { }
+        public partial struct _JS : IContext2DWithoutGetters.I_JS { }
         internal Context2D(string ctx, IJSRuntime js) : base(ctx, js) { }
         public async Task<Batch2D> CreateBatchAsync()
         {
@@ -24,7 +24,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// If you are used to the javascript naming convention and want to use it in C# too, use context.<see cref="JS"/> instead of context.
         /// </summary>
-        public partial struct _JS { }
+        public partial struct _JS : IContext2DWithoutGetters.I_JS { }
         private readonly List<Operation> operations = new List<Operation>();
         private readonly string ctx;
         private readonly IJSRuntime js;

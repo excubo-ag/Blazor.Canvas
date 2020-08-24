@@ -10,7 +10,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Pixel_manipulation" />
         /// </summary>
-        public partial struct _PixelManipulation { }
+        public partial struct _PixelManipulation : IContext2DWithoutGetters.I_PixelManipulation { }
         /// <summary>
         /// Creates a new, blank ImageData object with the specified dimensions. All of the pixels in the new object are transparent black.
         /// </summary>
@@ -67,7 +67,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Pixel_manipulation" />
         /// </summary>
-        public partial struct _PixelManipulation { }
+        public partial struct _PixelManipulation : IContext2DWithoutGetters.I_PixelManipulation { }
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap.
         /// </summary>

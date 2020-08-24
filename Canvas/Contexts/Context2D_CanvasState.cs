@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#The_canvas_state"/>
         /// </summary>
-        public partial struct _CanvasState { }
+        public partial struct _CanvasState : IContext2DWithoutGetters.I_CanvasState { }
         /// <summary>
         /// Saves the current drawing style state using a stack so you can revert any change you make to it using restore().
         /// </summary>
@@ -27,7 +27,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// State management. <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#The_canvas_state"/>
         /// </summary>
-        public partial struct _CanvasState { }
+        public partial struct _CanvasState : IContext2DWithoutGetters.I_CanvasState { }
         /// <summary>
         /// Saves the current drawing style state using a stack so you can revert any change you make to it using restore().
         /// </summary>

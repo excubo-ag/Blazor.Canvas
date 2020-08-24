@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Compositing" />
         /// </summary>
-        public partial struct _Compositing { }
+        public partial struct _Compositing : IContext2DWithoutGetters.I_Compositing { }
         /// <summary>
         /// Alpha value that is applied to shapes and images before they are composited onto the canvas. Default 1.0 (opaque).
         /// </summary>
@@ -41,7 +41,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Compositing" />
         /// </summary>
-        public partial struct _Compositing { }
+        public partial struct _Compositing : IContext2DWithoutGetters.I_Compositing { }
         /// <summary>
         /// Alpha value that is applied to shapes and images before they are composited onto the canvas. Default 1.0 (opaque).
         /// </summary>

@@ -9,7 +9,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Drawing_images" />
         /// </summary>
-        public partial struct _DrawingImages { }
+        public partial struct _DrawingImages : IContext2DWithoutGetters.I_DrawingImages { }
         /// <summary>
         /// Draws the specified image. This method is available in multiple formats, providing a great deal of flexibility in its use.
         /// </summary>
@@ -52,7 +52,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Drawing_images" />
         /// </summary>
-        public partial struct _DrawingImages { }
+        public partial struct _DrawingImages : IContext2DWithoutGetters.I_DrawingImages { }
         /// <summary>
         /// Draws the specified image. This method is available in multiple formats, providing a great deal of flexibility in its use.
         /// </summary>

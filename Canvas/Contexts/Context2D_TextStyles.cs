@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Text_styles" />
         /// </summary>
-        public partial struct _TextStyles { }
+        public partial struct _TextStyles : IContext2DWithoutGetters.I_TextStyles { }
         /// <summary>
         /// Font setting. Default value 10px sans-serif.
         /// </summary>
@@ -67,7 +67,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Text_styles" />
         /// </summary>
-        public partial struct _TextStyles { }
+        public partial struct _TextStyles : IContext2DWithoutGetters.I_TextStyles { }
         /// <summary>
         /// Font setting. Default value 10px sans-serif.
         /// </summary>

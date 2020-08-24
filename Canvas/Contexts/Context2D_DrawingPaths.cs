@@ -10,7 +10,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Drawing_paths" />
         /// </summary>
-        public partial struct _DrawingPaths { }
+        public partial struct _DrawingPaths : IContext2DWithoutGetters.I_DrawingPaths { }
         /// <summary>
         /// Fills the current sub-paths with the current fill style.
         /// </summary>
@@ -124,7 +124,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Drawing_paths" />
         /// </summary>
-        public partial struct _DrawingPaths { }
+        public partial struct _DrawingPaths : IContext2DWithoutGetters.I_DrawingPaths { }
         /// <summary>
         /// Fills the current sub-paths with the current fill style.
         /// </summary>

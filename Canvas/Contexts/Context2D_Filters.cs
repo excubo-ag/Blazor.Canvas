@@ -8,7 +8,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Filters" />
         /// </summary>
-        public partial struct _Filters { }
+        public partial struct _Filters : IContext2DWithoutGetters.I_Filters { }
         /// <summary>
         /// Applies a CSS or SVG filter to the canvas, e.g., to change its brightness or bluriness.
         /// </summary>
@@ -42,7 +42,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <summary>
         /// <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D#Filters" />
         /// </summary>
-        public partial struct _Filters { }
+        public partial struct _Filters : IContext2DWithoutGetters.I_Filters { }
         /// <summary>
         /// Applies a CSS or SVG filter to the canvas, e.g., to change its brightness or bluriness.
         /// </summary>
