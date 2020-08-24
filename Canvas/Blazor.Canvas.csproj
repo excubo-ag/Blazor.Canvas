@@ -9,7 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Excubo.Generators.Grouping" Version="1.2.2" />
+		<PackageReference Include="Excubo.Generators.Grouping" Version="1.2.2">
+			<IncludeAssets>all</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.7" />
 	</ItemGroup>
