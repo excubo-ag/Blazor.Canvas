@@ -17,17 +17,17 @@ Excubo.Blazor.Canvas is distributed [via nuget.org](https://www.nuget.org/packag
 
 #### Package Manager:
 ```ps
-Install-Package Excubo.Blazor.Canvas -Version 2.1.2
+Install-Package Excubo.Blazor.Canvas -Version 2.1.3
 ```
 
 #### .NET Cli:
 ```cmd
-dotnet add package Excubo.Blazor.Canvas --version 2.1.2
+dotnet add package Excubo.Blazor.Canvas --version 2.1.3
 ```
 
 #### Package Reference
 ```xml
-<PackageReference Include="Excubo.Blazor.Canvas" Version="2.1.2" />
+<PackageReference Include="Excubo.Blazor.Canvas" Version="2.1.3" />
 ```
 
 ### 2. Use a `canvas`, or the helper component `Canvas`
