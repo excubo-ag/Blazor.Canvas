@@ -7,8 +7,9 @@
     [Parameter]
     public string Repository { get; set; }
     [Parameter]
-    public string Section { get; set; } = "Pages";
+    public string Section { get; set; }
     [Parameter]
     public string Page { get; set; }
-    private string Url => $"https://github.com/excubo-ag/{Repository}/blob/main/TestProject_Components/{Section}/{Page}.razor";
+    private string Folder => Section == null ? "Pages" : $"Pages/{Section}";
+    private string Url => $"https://github.com/excubo-ag/{Repository}/blob/main/TestProject_Components/{Folder}/{Page}.razor";
 }
