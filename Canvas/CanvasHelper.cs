@@ -9,6 +9,12 @@ namespace Excubo.Blazor.Canvas
 {
     public static class CanvasHelper
     {
+        public static ValueTask<string> ToDataURLAsync(this IJSRuntime js, ElementReference canvas, string type = "image/png", double? encoderOptions = null)
+        {
+            var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
+            var get = $"{query}.toDataURL('{type}'{(encoderOptions == null ? "" : ", " + encoderOptions.Value)})";
+            return js.InvokeAsync<string>("eval", get);
+        }
         public static async Task<Context2D> GetContext2DAsync(this IJSRuntime js, ElementReference canvas, bool alpha = true, bool desynchronized = false)
         {
             var arguments = PrepareArguments(alpha, desynchronized);
