@@ -1,4 +1,6 @@
-﻿@page "/2D/DrawingText"
+﻿@using System.Text.Json
+
+@page "/2D/DrawingText"
 <SourceCodeLink Repository="Blazor.Canvas" Section="@nameof(Context2D)" Page="@nameof(DrawingText)" />
 <h3>DrawingText</h3>
 
@@ -47,7 +49,7 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
             await ctx.FillTextAsync("canvas", 100, 10);
             Messages.Add("Wrote canvas");
             var measurement = await ctx.MeasureTextAsync("Hello canvas");
-            Messages.Add($"Measured \"Hello canvas\": {measurement}");
+            Messages.Add($"Measured \"Hello canvas\": {JsonSerializer.Serialize(measurement, new JsonSerializerOptions { WriteIndented = true })}");
             Messages = Messages.ToList();
             await InvokeAsync(StateHasChanged);
         }

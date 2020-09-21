@@ -1,5 +1,6 @@
 ﻿using Excubo.Generators.Grouping;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace Excubo.Blazor.Canvas.Contexts
 {
@@ -53,7 +54,12 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="text"></param>
         /// <returns></returns>
         [Group(typeof(_JS), "measureText"), Group(typeof(_DrawingText))]
-        public ValueTask<TextMetrics> MeasureTextAsync(string text) => InvokeOnCtxAsync<TextMetrics>("measureText", text);
+        public ValueTask<TextMetrics> MeasureTextAsync(string text) => js.InvokeAsync<TextMetrics>("eval", $@"
+const m = {ctx}.measureText('{text}');
+const properties = Object.entries(Object.getOwnPropertyDescriptors(TextMetrics.prototype)).filter(([k, d]) => typeof d.get === 'function');
+const kvs = properties.map(([k, d]) => [k, m[k]]);
+const as_object = kvs.reduce(function (p, c) {{ p[c[0]] = c[1]; return p; }}, {{}});
+as_object;");
     }
     public partial class Batch2D
     {
