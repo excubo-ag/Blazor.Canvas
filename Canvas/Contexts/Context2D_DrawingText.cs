@@ -55,11 +55,10 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <returns></returns>
         [Group(typeof(_JS), "measureText"), Group(typeof(_DrawingText))]
         public ValueTask<TextMetrics> MeasureTextAsync(string text) => js.InvokeAsync<TextMetrics>("eval", $@"
-const m = {ctx}.measureText('{text}');
-const properties = Object.entries(Object.getOwnPropertyDescriptors(TextMetrics.prototype)).filter(([k, d]) => typeof d.get === 'function');
-const kvs = properties.map(([k, d]) => [k, m[k]]);
-const as_object = kvs.reduce(function (p, c) {{ p[c[0]] = c[1]; return p; }}, {{}});
-as_object;");
+var m = {ctx}.measureText('{text}');
+var properties = Object.entries(Object.getOwnPropertyDescriptors(TextMetrics.prototype)).filter(([k, d]) => typeof d.get === 'function');
+var kvs = properties.map(([k, d]) => [k, m[k]]);
+kvs.reduce(function (p, c) {{ p[c[0]] = c[1]; return p; }}, {{}});");
     }
     public partial class Batch2D
     {
