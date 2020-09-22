@@ -2,6 +2,9 @@ name: .NET Core deploy to GitHub pages
 
 env:
   dotnet_version: 5.0.100-preview.7.20366.6
+  project_name: "TestProject_ClientSide/TestProject_ClientSide.csproj"
+  base_href: /Blazor.Canvas/
+  target_framework: net5.0
 
 on:
   push:
@@ -25,12 +28,12 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-restore
     - name: Publish
-      run: dotnet publish "TestProject_ClientSide/TestProject_ClientSide.csproj" -c Release -o app/publish
+      run: dotnet publish ${{ env.project_name }} -f ${{ env.target_framework }} -c Release -o app/publish
     - name: Rewrite base href
       uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
       with:
         html_path: app/publish/wwwroot/index.html
-        base_href: /Blazor.Canvas/
+        base_href: ${{ env.base_href }}
     - name: add .nojekyll
       run: touch app/publish/wwwroot/.nojekyll
     - name: write git commit id
