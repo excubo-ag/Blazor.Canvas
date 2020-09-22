@@ -19,7 +19,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{dotnet_version}}
+        dotnet-version: ${{ dotnet_version }}
     - name: Install dependencies
       run: dotnet restore
     - name: Build
