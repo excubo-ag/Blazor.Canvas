@@ -9,7 +9,7 @@ window.Excubo.Canvas = window.Excubo.Canvas || {
                 o1 = o1[part];
             }
             return o1;
-        }
+        };
         for (let op of ops) {
             switch (op.t) {
                 case 'S': // Set
