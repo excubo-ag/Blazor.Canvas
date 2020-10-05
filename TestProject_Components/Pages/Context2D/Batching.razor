@@ -86,7 +86,10 @@ Important: the execution of the call happens on dispose of the batch. That means
         await ctx.DrawingText.FillTextAsync("Hello", 0, 100);
         await ctx.FillAndStrokeStyles.FillStyleAsync("green");
         await ctx.FillAndStrokeStyles.StrokeStyleAsync("green");
-        await ctx.TextStyles.FontAsync("48px serif");
+        for (int i = 0; i < 1000; ++i)
+        {
+            await ctx.TextStyles.FontAsync("48px serif");
+        }
         await ctx.CanvasState.RestoreAsync();
         await ctx.DrawingText.FillTextAsync("canvas", 100, 40);
         await ctx.CanvasState.RestoreAsync();
@@ -123,7 +126,10 @@ Important: the execution of the call happens on dispose of the batch. That means
         await ctx.Paths.MoveToAsync(100, 100);
         await ctx.Paths.LineToAsync(100, 200);
         await ctx.Paths.LineToAsync(200, 200);
-        await ctx.Paths.LineToAsync(200, 100);
+        for (int i = 0; i < 1000; ++i)
+        {
+            await ctx.Paths.LineToAsync(200, 100);
+        }
         await ctx.DrawingPaths.StrokeAsync();
         await ctx.Paths.BeginPathAsync();
         await ctx.Paths.EllipseAsync(300, 200, 50, 20, 0, 0, 360);

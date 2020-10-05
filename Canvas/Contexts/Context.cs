@@ -9,7 +9,7 @@ namespace Excubo.Blazor.Canvas.Contexts
 {
     public class Context : IAsyncDisposable
     {
-        protected readonly string ctx;
+        public readonly string ctx;
         protected readonly IJSRuntime js;
         public Context(string ctx, IJSRuntime js)
         {

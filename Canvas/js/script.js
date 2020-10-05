@@ -14,10 +14,12 @@ window.Excubo.Canvas = window.Excubo.Canvas || {
             switch (op.t) {
                 case 'S': // Set
                     // the value op.v is set to the identifier op.i
+                    // this cannot be a bulk operation, as we detect multiple consecutive set operations and only execute the last one (overrides anyway)
                     ctx[op.i] = op.v;
                     break;
                 case 'G': // Gradient/Pattern
                     // we generate a gradient (linear/radial) or pattern, which we have encoded in op.o1 ('L', 'R', or 'P'), and with args op.v and color stops / image in op.o2.
+                    // this cannot be a bulk operation, as we detect multiple consecutive set operations and only execute the last one (overrides anyway)
                     if (op.o1 == 'P') {
                         ctx[op.i] = ctx.createPattern(d(op.o2), op.v);
                     } else {
@@ -30,31 +32,77 @@ window.Excubo.Canvas = window.Excubo.Canvas || {
                     break;
                 case 'I': // Invoke
                     // the value(s) op.v are used as args on the function op.i
-                    if (op.v == undefined) {
-                        ctx[op.i]();
-                    } else if (Array.isArray(op.v)) {
-                        ctx[op.i](...op.v);
+                    if (op.b) {
+                        // this is a bulk op, the values are stored as an array for the individual operations.
+                        for (let v of op.v) {
+                            if (v == undefined) {
+                                ctx[op.i]();
+                            } else if (Array.isArray(v)) {
+                                ctx[op.i](...v);
+                            } else {
+                                ctx[op.i](v);
+                            }
+                        }
                     } else {
-                        ctx[op.i](op.v);
+                        // we have just one op.
+                        let v = op.v;
+                        if (v == undefined) {
+                            ctx[op.i]();
+                        } else if (Array.isArray(v)) {
+                            ctx[op.i](...v);
+                        } else {
+                            ctx[op.i](v);
+                        }
                     }
                     break;
                 case 'C': // Complex
                     // the js variables o1/o2 are used as first/second arg on the function op.i with more args op.v
-                    if (op.o2 == undefined) {
-                        if (op.v == undefined) {
-                            ctx[op.i](d(op.o1));
-                        } else if (Array.isArray(op.v)) {
-                            ctx[op.i](d(op.o1), ...op.v);
-                        } else {
-                            ctx[op.i](d(op.o1), op.v);
+                    if (op.b) {
+                        // this is a bulk op, the values are stored as an array for the individual operations.
+                        // let's first see how many ops we actually have:
+                        const n_ops = op.o1.length;
+                        for (let i = 0; i < n_ops; i++) {
+                            let v = op.v[i];
+                            let o1 = op.o1[i];
+                            let o2 = op.o2[i];
+                            if (o2 == undefined) {
+                                if (v == undefined) {
+                                    ctx[op.i](d(o1));
+                                } else if (Array.isArray(v)) {
+                                    ctx[op.i](d(o1), ...v);
+                                } else {
+                                    ctx[op.i](d(o1), v);
+                                }
+                            } else {
+                                if (v == undefined) {
+                                    ctx[op.i](d(o1), d(o2));
+                                } else if (Array.isArray(v)) {
+                                    ctx[op.i](d(o1), d(o2), ...v);
+                                } else {
+                                    ctx[op.i](d(o1), d(o2), v);
+                                }
+                            }
                         }
                     } else {
-                        if (op.v == undefined) {
-                            ctx[op.i](d(op.o1), d(op.o2));
-                        } else if (Array.isArray(op.v)) {
-                            ctx[op.i](d(op.o1), d(op.o2), ...op.v);
+                        let v = op.v;
+                        let o1 = op.o1;
+                        let o2 = op.o2;
+                        if (o2 == undefined) {
+                            if (v == undefined) {
+                                ctx[op.i](d(o1));
+                            } else if (Array.isArray(v)) {
+                                ctx[op.i](d(o1), ...v);
+                            } else {
+                                ctx[op.i](d(o1), v);
+                            }
                         } else {
-                            ctx[op.i](d(op.o1), d(op.o2), op.v);
+                            if (v == undefined) {
+                                ctx[op.i](d(o1), d(o2));
+                            } else if (Array.isArray(v)) {
+                                ctx[op.i](d(o1), d(o2), ...v);
+                            } else {
+                                ctx[op.i](d(o1), d(o2), v);
+                            }
                         }
                     }
                     break;

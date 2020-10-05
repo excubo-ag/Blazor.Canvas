@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject_Components", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject_ServerSide", "TestProject_ServerSide\TestProject_ServerSide.csproj", "{C92641E8-4DAD-4FB0-BBC2-BDEBA016B917}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests_Blazor.Canvas", "Tests_Blazor.Canvas\Tests_Blazor.Canvas.csproj", "{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{C92641E8-4DAD-4FB0-BBC2-BDEBA016B917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C92641E8-4DAD-4FB0-BBC2-BDEBA016B917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C92641E8-4DAD-4FB0-BBC2-BDEBA016B917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 		{D2E2172E-BD31-4D8D-8C83-CE4D53E35711} = {419FC38D-DC1B-4201-BCB4-D4A00F780B10}
 		{B9606F4E-B2B3-4CF3-8535-3CA499DC5E35} = {419FC38D-DC1B-4201-BCB4-D4A00F780B10}
 		{C92641E8-4DAD-4FB0-BBC2-BDEBA016B917} = {419FC38D-DC1B-4201-BCB4-D4A00F780B10}
+		{46B87C9F-2A62-41A8-B739-46F5EEA7E01A} = {419FC38D-DC1B-4201-BCB4-D4A00F780B10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D2C7E79-4DED-45B6-8F11-55E2CA67D344}

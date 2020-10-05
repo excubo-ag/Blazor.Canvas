@@ -118,7 +118,8 @@ Users get a type-safe API that is fully compatible with the canvas API.
 
 - Performance
 
-By combining calls into a batch, high performance is achieved. Whenever you perform a larger amount of calls, you should batch them
+By combining calls into a batch, high performance is achieved. Whenever you perform a larger amount of calls, you should batch them.
+The library  does this by combining the operations into just one JS interop call and minimizing the payload by grouping consecutive operations of the same type (e.g. multiple `lineTo` calls).
 
 - No JS payload
 
