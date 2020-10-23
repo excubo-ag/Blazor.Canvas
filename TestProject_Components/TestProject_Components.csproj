@@ -8,7 +8,7 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Excubo.Blazor.Grids" Version="2.0.7" />
+		<PackageReference Include="Excubo.Blazor.Grids" Version="2.0.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0-rc.2.20475.17" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.2.20475.17" />
 	</ItemGroup>
