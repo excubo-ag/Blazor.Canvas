@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Canvas", "Canvas", "{419FC38D-DC1B-4201-BCB4-D4A00F780B10}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject_Components", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject_ServerSide", "TestProject_ServerSide\TestProject_ServerSide.csproj", "{C92641E8-4DAD-4FB0-BBC2-BDEBA016B917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests_Blazor.Canvas", "Tests_Blazor.Canvas\Tests_Blazor.Canvas.csproj", "{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests_Blazor.Canvas", "Tests_Blazor.Canvas\Tests_Blazor.Canvas.csproj", "{46B87C9F-2A62-41A8-B739-46F5EEA7E01A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

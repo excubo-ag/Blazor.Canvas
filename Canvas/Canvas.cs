@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas
 {
-    public class Canvas : ComponentBase
+    [Excubo.Generators.Blazor.GenerateSetParametersAsync(RequireExactMatch = true)]
+    public partial class Canvas : ComponentBase
     {
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {

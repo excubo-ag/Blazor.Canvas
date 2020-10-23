@@ -4,7 +4,7 @@ env:
   dotnet_version: 5.0.100-rc.2.20479.15
   project_name: "TestProject_ClientSide/TestProject_ClientSide.csproj"
   base_href: /Blazor.Canvas/
-  target_framework: netstandard2.1
+  target_framework: net5.0
 
 on:
   push:
