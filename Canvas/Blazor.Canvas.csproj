@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Excubo.Generators.Blazor" Version="1.11.0" />
+		<PackageReference Include="Excubo.Generators.Blazor" Version="1.11.2" />
 		<PackageReference Include="Excubo.Generators.Grouping" Version="1.4.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.9" />
