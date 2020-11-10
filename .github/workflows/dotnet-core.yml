@@ -1,15 +1,13 @@
 name: .NET Core deploy to GitHub pages
 
 env:
-  dotnet_version: 5.0.100-rc.2.20479.15
+  dotnet_version: 5.0.100
   project_name: "TestProject_ClientSide/TestProject_ClientSide.csproj"
   base_href: /Blazor.Canvas/
   target_framework: net5.0
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
