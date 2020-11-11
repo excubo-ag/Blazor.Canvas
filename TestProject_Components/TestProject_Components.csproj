@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0</TargetFrameworks>
 		<LangVersion>preview</LangVersion>
-		<RazorLangVersion>3.0</RazorLangVersion>
 	</PropertyGroup>
 
 
