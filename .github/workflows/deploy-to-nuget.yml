@@ -1,0 +1,31 @@
+name: Deploy nupkg
+
+env:
+  dotnet_version: 5.0.100
+  project_name: "Canvas/Blazor.Canvas.csproj"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build_and_deploy:
+    if: "contains(github.event.head_commit.message, '[deploy]')"
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnet_version }}
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build -c Release --no-restore
+    - name: Test
+      run: dotnet test -c Release --no-restore
+    - name: Pack
+      run: dotnet pack -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -c Release -o app/packed --no-restore ${{ env.project_name }}
+    - name: Deploy to nuget
+      run: dotnet nuget push -s https://api.nuget.org/v3/index.json app/packed/*.nupkg -k ${{ secrets.NUGETKEY }} > push_log || grep "409" push_log
