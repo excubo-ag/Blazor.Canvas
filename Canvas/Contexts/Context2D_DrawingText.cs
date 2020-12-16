@@ -1,6 +1,6 @@
 ﻿using Excubo.Generators.Grouping;
-using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas.Contexts
 {
