@@ -40,14 +40,14 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [Group(typeof(_JS), "textBaseLine"), Group(typeof(_TextStyles))]
-        public ValueTask TextBaseLineAsync(TextBaseLine value) => SetAsync("textBaseLine", value);
+        [Group(typeof(_JS), "textBaseline"), Group(typeof(_TextStyles))]
+        public ValueTask TextBaseLineAsync(TextBaseLine value) => SetAsync("textBaseline", value);
         /// <summary>
         /// Baseline alignment setting. Possible values: top, hanging, middle, alphabetic (default), ideographic, bottom.
         /// </summary>
         /// <returns>current value</returns>
-        [Group(typeof(_JS), "textBaseLine"), Group(typeof(_TextStyles))]
-        public ValueTask<TextBaseLine> TextBaseLineAsync() => GetAsync<TextBaseLine>("textBaseLine");
+        [Group(typeof(_JS), "textBaseline"), Group(typeof(_TextStyles))]
+        public ValueTask<TextBaseLine> TextBaseLineAsync() => GetAsync<TextBaseLine>("textBaseline");
         /// <summary>
         /// Directionality. Possible values: ltr, rtl, inherit (default).
         /// </summary>
@@ -87,8 +87,8 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [Group(typeof(_JS), "textBaseLine"), Group(typeof(_TextStyles))]
-        public ValueTask TextBaseLineAsync(TextBaseLine value) => SetAsync("textBaseLine", value);
+        [Group(typeof(_JS), "textBaseline"), Group(typeof(_TextStyles))]
+        public ValueTask TextBaseLineAsync(TextBaseLine value) => SetAsync("textBaseline", value);
         /// <summary>
         /// Directionality. Possible values: ltr, rtl, inherit (default).
         /// </summary>

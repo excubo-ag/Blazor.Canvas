@@ -225,7 +225,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         ValueTask FontAsync(string value);
         [Group(typeof(I_JS), "textAlign"), Group(typeof(I_TextStyles))]
         ValueTask TextAlignAsync(TextAlign value);
-        [Group(typeof(I_JS), "textBaseLine"), Group(typeof(I_TextStyles))]
+        [Group(typeof(I_JS), "textBaseline"), Group(typeof(I_TextStyles))]
         ValueTask TextBaseLineAsync(TextBaseLine value);
         #endregion
         #region Transformations
