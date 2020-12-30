@@ -1,0 +1,114 @@
+﻿@page "/2D/clock"
+<SourceCodeLink Repository="Blazor.Canvas" Section="@nameof(Pages.Context2D)" Page="@nameof(ClockExample)" />
+@using Microsoft.JSInterop
+@using System.Timers
+@using Excubo.Blazor.Canvas.Contexts
+@inject IJSRuntime js
+
+<Canvas width="400" height="400" @ref="_canvas" style="background: #333"></Canvas>
+
+@code {
+    private Canvas _canvas;
+    private Context2D _context;
+    private int _radius = 150;
+    private Timer _timer;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _context = await _canvas.GetContext2DAsync();
+            await _context.TranslateAsync(200, 200);
+
+            _timer = new Timer(250);
+            _timer.Elapsed += NotifyTimerElapsed;
+            _timer.Enabled = true;
+        }
+    }
+
+    private async void NotifyTimerElapsed(Object _, ElapsedEventArgs e)
+    {
+        await DrawAsync();
+    }
+
+    private async Task DrawAsync()
+    {
+        await using var batch = await _context.CreateBatchAsync();
+        await DrawFaceAsync(batch);
+        await DrawNumbersAsync(batch);
+        await DrawHandsAsync(batch);
+    }
+
+    private async Task DrawFaceAsync(Batch2D batch)
+    {
+        await batch.BeginPathAsync();
+        await batch.ArcAsync(0, 0, _radius, 0, 2 * Math.PI);
+        await batch.FillStyleAsync("white");
+        await batch.FillAsync(FillRule.EvenOdd);
+
+        await batch.StrokeStyleAsync(0, 0, _radius * 0.95, 0, 0, _radius * 1.05, (0.0, "#333"), (0.5, "white"), (1, "#333"));
+        await batch.LineWidthAsync(_radius * 0.1);
+        await batch.StrokeAsync();
+
+        await batch.BeginPathAsync();
+        await batch.ArcAsync(0, 0, _radius * 0.1, 0, 2 * Math.PI);
+        await batch.FillStyleAsync("#333");
+        await batch.FillAsync(FillRule.EvenOdd);
+    }
+
+    private async Task DrawNumbersAsync(Batch2D batch)
+    {
+        await batch.FillStyleAsync("#333");
+        await batch.FontAsync($"{_radius * 0.15}px arial");
+        await batch.TextBaseLineAsync(TextBaseLine.Middle);
+        await batch.TextAlignAsync(TextAlign.Center);
+
+        for (int n = 1; n < 13; ++n)
+        {
+            var angle = n * Math.PI / 6;
+
+            await batch.RotateAsync(angle);
+            await batch.TranslateAsync(0, -_radius * 0.85);
+            await batch.RotateAsync(-angle);
+
+            await batch.FillTextAsync(n.ToString(), 0, 0);
+            await batch.RotateAsync(angle);
+            await batch.TranslateAsync(0, _radius * 0.85);
+            await batch.RotateAsync(-angle);
+        }
+    }
+
+    private async Task DrawHandsAsync(Batch2D batch)
+    {
+        var now = DateTime.Now;
+        double hour = now.Hour;
+        double minute = now.Minute;
+        double second = now.Second;
+
+        hour = hour % 12;
+        hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));
+
+        // hour
+        await DrawHandAsync(batch, hour, _radius * 0.5, _radius * 0.07);
+
+        //minute
+        minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+        await DrawHandAsync(batch, minute, _radius * 0.8, _radius * 0.07);
+
+        // second
+        second = (second * Math.PI / 30);
+        await DrawHandAsync(batch, second, _radius * 0.9, _radius * 0.02);
+    }
+
+    private async Task DrawHandAsync(Batch2D batch, double pos, double length, double width)
+    {
+        await batch.BeginPathAsync();
+        await batch.LineWidthAsync(width);
+        await batch.LineCapAsync(LineCap.Round);
+        await batch.MoveToAsync(0, 0);
+        await batch.RotateAsync(pos);
+        await batch.LineToAsync(0, -length);
+        await batch.StrokeAsync();
+        await batch.RotateAsync(-pos);
+    }
+}

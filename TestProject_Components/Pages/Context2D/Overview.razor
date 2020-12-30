@@ -25,6 +25,7 @@ Extra feature:
 Example applications:
 <br />
 <a href="2D/whiteboard"><Canvas @ref="Whiteboard" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
+<a href="2D/clock"><Canvas @ref="Clock" width="240" height="125" style="padding: 4px; border: 2px solid black; margin: 10px; box-shadow: rgba(0,0,0,.2) 8px 8px" /></a>
 
 @code {
     private Canvas CanvasState;
@@ -44,6 +45,7 @@ Example applications:
     private Canvas Transformations;
     private Canvas Batching;
     private Canvas Whiteboard;
+    private Canvas Clock;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -197,6 +199,12 @@ Example applications:
                 await ctx.FontAsync("24px sans-serif");
                 await ctx.TextAlignAsync(TextAlign.Center);
                 await ctx.FillTextAsync(nameof(Whiteboard), 120, 50);
+            }
+            await using (var ctx = await Clock.GetContext2DAsync())
+            {
+                await ctx.FontAsync("24px sans-serif");
+                await ctx.TextAlignAsync(TextAlign.Center);
+                await ctx.FillTextAsync(nameof(Clock), 120, 50);
             }
         }
         await base.OnAfterRenderAsync(firstRender);
