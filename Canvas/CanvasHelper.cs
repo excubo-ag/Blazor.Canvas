@@ -15,10 +15,27 @@ namespace Excubo.Blazor.Canvas
             var get = $"{query}.toDataURL('{type}'{(encoderOptions == null ? "" : ", " + encoderOptions.Value)})";
             return js.InvokeAsync<string>("eval", get);
         }
+        /// <summary>
+        /// Returns a 2D context for a given canvas.
+        /// </summary>
+        /// <param name="js">The JS runtime, usually injected into a component.</param>
+        /// <param name="canvas">An ElementReference to the &lt;canvas&gt; tag in a component.</param>
         public static async Task<Context2D> GetContext2DAsync(this IJSRuntime js, ElementReference canvas, bool alpha = true, bool desynchronized = false)
         {
             var arguments = PrepareArguments(alpha, desynchronized);
             var (context_id, command) = BuildEvalCommand(canvas, "2d", arguments);
+            await js.InvokeVoidAsync("eval", command);
+            return new Context2D(context_id, js);
+        }
+        /// <summary>
+        /// Returns a 2D context for a given canvas.
+        /// </summary>
+        /// <param name="js">The JS runtime, usually injected into a component.</param>
+        /// <param name="js_canvas_object_reference">The variable name of the canvas, e.g. window.myOffscreenCanvas</param>
+        public static async Task<Context2D> GetContext2DAsync(this IJSRuntime js, string js_canvas_object_reference, bool alpha = true, bool desynchronized = false)
+        {
+            var arguments = PrepareArguments(alpha, desynchronized);
+            var (context_id, command) = BuildEvalCommand(js_canvas_object_reference, "2d", arguments);
             await js.InvokeVoidAsync("eval", command);
             return new Context2D(context_id, js);
         }
@@ -77,6 +94,14 @@ namespace Excubo.Blazor.Canvas
             var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
             var get = $"{query}.getContext('{type}'{(arguments == null ? "" : ", " + arguments)})";
             var context_id = "ctx_" + canvas.Id.Replace('-', '_');
+            var lhs = $"window.{context_id}";
+            var assignment = $"{lhs} = {get}";
+            return (Id: context_id, Command: assignment);
+        }
+        private static (string Id, string Command) BuildEvalCommand(string js_canvas_object_reference, string type, string arguments = null)
+        {
+            var get = $"{js_canvas_object_reference}.getContext('{type}'{(arguments == null ? "" : ", " + arguments)})";
+            var context_id = "ctx_" + Guid.NewGuid().ToString().Replace('-', '_');
             var lhs = $"window.{context_id}";
             var assignment = $"{lhs} = {get}";
             return (Id: context_id, Command: assignment);
