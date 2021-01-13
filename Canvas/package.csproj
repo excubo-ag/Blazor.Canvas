@@ -1,7 +1,4 @@
 <Project>
-  <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
   <!--Title, Description, Tags, Product-->
   <PropertyGroup>
     <Title>HTML canvas for Blazor</Title>
