@@ -20,7 +20,7 @@
   <!--PackageId, Version-->
   <PropertyGroup>
     <PackageId>Excubo.Blazor.Canvas</PackageId>
-    <Version>2.5.8</Version>
+    <Version>2.5.9</Version>
   </PropertyGroup>
   <!--Self Include-->
   <ItemGroup>
