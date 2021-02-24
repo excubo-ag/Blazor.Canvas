@@ -6,6 +6,13 @@
     <title>Excubo.Blazor.Canvas demo (Blazor ClientSide)</title>
     <base href="/" />
     <link href="_content/TestProject_Components/site.css" rel="stylesheet" />
+    <script>
+        window.loadImage = (ref, id, url) => {
+            const img = document.getElementById(id);
+            img.onload = () => ref.invokeMethodAsync('UpdateCanvasAsync');
+            img.src = url;
+        }
+    </script>
 </head>
 
 <body>

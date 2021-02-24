@@ -7,7 +7,7 @@
 For more information, please visit <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/</a>.
 
 <hr />
-<img id="castle" width="3840" height="2160" style="display:none" src="https://upload.wikimedia.org/wikipedia/commons/4/45/Nagoya_Castle%28Larger%29.jpg" />
+<img id="castle" width="3840" height="2160" style="display:none" />
 
 <hr />
 <Canvas @ref="canvas" width="384px" height="216px" style="border: 5px solid red" />
@@ -19,11 +19,12 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
     {
         if (firstRender)
         {
-            await UpdateCanvasAsync();
+            await js.InvokeVoidAsync("loadImage", DotNetObjectReference.Create(this), "castle", "https://upload.wikimedia.org/wikipedia/commons/4/45/Nagoya_Castle%28Larger%29.jpg");
         }
         await base.OnAfterRenderAsync(firstRender);
     }
-    private async Task UpdateCanvasAsync()
+    [JSInvokable]
+    public async Task UpdateCanvasAsync()
     {
         await js.InvokeVoidAsync("eval", "myimage = document.getElementById('castle')");
         await using (var ctx = await canvas.GetContext2DAsync())
