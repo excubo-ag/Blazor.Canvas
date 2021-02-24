@@ -1,0 +1,38 @@
+﻿@page "/2D/DrawingImageImmediately"
+@using Microsoft.JSInterop
+
+<SourceCodeLink Repository="Blazor.Canvas" Section="@nameof(Context2D)" Page="@nameof(DrawingImageImmediately)" />
+<h3>DrawingImage (Immediately on render)</h3>
+
+For more information, please visit <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/</a>.
+
+<hr />
+<img id="castle" width="3840" height="2160" style="display:none" src="https://upload.wikimedia.org/wikipedia/commons/4/45/Nagoya_Castle%28Larger%29.jpg" />
+
+<hr />
+<Canvas @ref="canvas" width="384px" height="216px" style="border: 5px solid red" />
+
+@inject IJSRuntime js
+@code {
+    private Canvas canvas;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await UpdateCanvasAsync();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private async Task UpdateCanvasAsync()
+    {
+        await js.InvokeVoidAsync("eval", "myimage = document.getElementById('castle')");
+        await using (var ctx = await canvas.GetContext2DAsync())
+        {
+            await ctx.ClearRectAsync(0, 0, 384, 216);
+            await ctx.SetTransformAsync(1, 0, 0, 1, 0, 0);
+            await ctx.RestoreAsync();
+            await ctx.SaveAsync();
+            await ctx.DrawImageAsync("myimage", 0, 0, 3840, 2160, 0, 0, 384, 216);
+        }
+    }
+}
