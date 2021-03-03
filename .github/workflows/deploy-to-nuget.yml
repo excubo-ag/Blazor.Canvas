@@ -1,7 +1,7 @@
 name: Deploy nupkg
 
 env:
-  dotnet_version: 5.0.100
+  dotnet_version: 5.0.200
   project_name: "Canvas/Blazor.Canvas.csproj"
 
 on:
