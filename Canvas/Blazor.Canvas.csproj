@@ -10,10 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Excubo.Generators.Blazor" Version="1.11.4" />
     <PackageReference Include="Excubo.Generators.Grouping" Version="1.4.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.12" Condition=" '$(TargetFramework)' == 'netstandard2.1' " />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.12" Condition=" '$(TargetFramework)' == 'netstandard2.1' " />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.3" Condition=" '$(TargetFramework)' == 'net5.0' " />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.3" Condition=" '$(TargetFramework)' == 'net5.0' " />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.13" Condition=" '$(TargetFramework)' == 'netstandard2.1' " />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.13" Condition=" '$(TargetFramework)' == 'netstandard2.1' " />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.4" Condition=" '$(TargetFramework)' == 'net5.0' " />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" Condition=" '$(TargetFramework)' == 'net5.0' " />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\" />
