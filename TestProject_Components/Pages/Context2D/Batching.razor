@@ -60,7 +60,7 @@ Important: the execution of the call happens on dispose of the batch. That means
         {
             if (Batch)
             {
-                await using (var batch = await ctx.CreateBatchAsync())
+                await using (var batch = ctx.CreateBatch())
                 {
                     await ExecuteAsync(batch);
                 }
