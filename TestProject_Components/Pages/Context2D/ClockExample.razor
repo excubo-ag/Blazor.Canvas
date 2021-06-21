@@ -33,7 +33,7 @@
 
     private async Task DrawAsync()
     {
-        await using var batch = await _context.CreateBatchAsync();
+        await using var batch = _context.CreateBatch();
         await DrawFaceAsync(batch);
         await DrawNumbersAsync(batch);
         await DrawHandsAsync(batch);

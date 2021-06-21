@@ -77,7 +77,7 @@
     }
     async Task DrawCanvasAsync(double prev_x, double prev_y, double x, double y, string clr)
     {
-        await using (var ctx2 = await ctx1.CreateBatchAsync())
+        await using (var ctx2 = ctx1.CreateBatch())
         {
             await ctx2.BeginPathAsync();
             await ctx2.MoveToAsync(prev_x, prev_y);

@@ -22,6 +22,7 @@ namespace Excubo.Blazor.Canvas
         /// <param name="canvas">An ElementReference to the &lt;canvas&gt; tag in a component.</param>
         public static async Task<Context2D> GetContext2DAsync(this IJSRuntime js, ElementReference canvas, bool alpha = true, bool desynchronized = false)
         {
+            await LoadExcuboCanvasCodeAsync(js);
             var arguments = PrepareArguments(alpha, desynchronized);
             var (context_id, command) = BuildEvalCommand(canvas, "2d", arguments);
             await js.InvokeVoidAsync("eval", command);
@@ -34,6 +35,7 @@ namespace Excubo.Blazor.Canvas
         /// <param name="js_canvas_object_reference">The variable name of the canvas, e.g. window.myOffscreenCanvas</param>
         public static async Task<Context2D> GetContext2DAsync(this IJSRuntime js, string js_canvas_object_reference, bool alpha = true, bool desynchronized = false)
         {
+            await LoadExcuboCanvasCodeAsync(js);
             var arguments = PrepareArguments(alpha, desynchronized);
             var (context_id, command) = BuildEvalCommand(js_canvas_object_reference, "2d", arguments);
             await js.InvokeVoidAsync("eval", command);
@@ -43,6 +45,7 @@ namespace Excubo.Blazor.Canvas
         public static async Task<ContextImageBitmapRendering> GetContextImageBitmapRenderingAsync(this IJSRuntime js, ElementReference canvas)
         {
             throw new NotImplementedException("Sorry, not yet implemented");
+            await LoadExcuboCanvasCodeAsync(js);
             var (context_id, command) = BuildEvalCommand(canvas, "bitmaprenderer");
             await js.InvokeVoidAsync("eval", command);
             return new ContextImageBitmapRendering(context_id, js);
@@ -53,6 +56,7 @@ namespace Excubo.Blazor.Canvas
             PowerPreference power_preference = PowerPreference.Default, bool premultiplied_alpha = false, bool preserve_drawing_buffer = false, bool stencil = false)
         {
             throw new NotImplementedException("Sorry, not yet implemented");
+            await LoadExcuboCanvasCodeAsync(js);
             var arguments = PrepareArguments(alpha, desynchronized, antialias, depth, fail_if_major_performance_caveat,
                 power_preference, premultiplied_alpha, preserve_drawing_buffer, stencil);
             var (context_id, command) = BuildEvalCommand(canvas, "webgl", arguments);
@@ -63,6 +67,7 @@ namespace Excubo.Blazor.Canvas
         public static async Task<ContextWebGL2> GetContextWebGL2Async(this IJSRuntime js, ElementReference canvas)
         {
             throw new NotImplementedException("Sorry, not yet implemented");
+            await LoadExcuboCanvasCodeAsync(js);
             var (context_id, command) = BuildEvalCommand(canvas, "webgl2");
             await js.InvokeVoidAsync("eval", command);
             return new ContextWebGL2(context_id, js);
@@ -105,6 +110,10 @@ namespace Excubo.Blazor.Canvas
             var lhs = $"window.{context_id}";
             var assignment = $"{lhs} = {get}";
             return (Id: context_id, Command: assignment);
+        }
+        private static ValueTask LoadExcuboCanvasCodeAsync(IJSRuntime js)
+        {
+            return js.InvokeVoidAsync("eval", "window.Excubo=window.Excubo||{};window.Excubo.Canvas=window.Excubo.Canvas||{measureText:(n,t)=>{n=window[`${n}`];var i=n.measureText(t),r=Object.entries(Object.getOwnPropertyDescriptors(TextMetrics.prototype)).filter(([,n])=>typeof n.get=='function'),u=r.map(([n])=>[n,i[n]]);return u.reduce(function(n,t){return n[t[0]]=t[1],n},{})},batch:(n,t)=>{n=window[`${n}`];d=n=>{let t=window;for(let i of n.split('.'))t=t[i];return t};for(let i of t)switch(i.t){case'S':n[i.i]=i.v;break;case'G':if(i.o1=='P')n[i.i]=n.createPattern(d(i.o2),i.v);else{let t=n[`create${i.o1=='L'?'Linear':'Radial'}Gradient`](...i.v);for(let n of i.o2)t.addColorStop(n.offset,n.color);n[i.i]=t}break;case'I':if(i.b)for(let t of i.v)t==undefined?n[i.i]():Array.isArray(t)?n[i.i](...t):n[i.i](t);else{let t=i.v;t==undefined?n[i.i]():Array.isArray(t)?n[i.i](...t):n[i.i](t)}break;case'C':if(i.b){const t=i.o1.length;for(let r=0;r<t;r++){let t=i.v[r],u=i.o1[r],f=i.o2[r];f==undefined?t==undefined?n[i.i](d(u)):Array.isArray(t)?n[i.i](d(u),...t):n[i.i](d(u),t):t==undefined?n[i.i](d(u),d(f)):Array.isArray(t)?n[i.i](d(u),d(f),...t):n[i.i](d(u),d(f),t)}}else{let t=i.v,r=i.o1,u=i.o2;u==undefined?t==undefined?n[i.i](d(r)):Array.isArray(t)?n[i.i](d(r),...t):n[i.i](d(r),t):t==undefined?n[i.i](d(r),d(u)):Array.isArray(t)?n[i.i](d(r),d(u),...t):n[i.i](d(r),d(u),t)}}}};");
         }
     }
 }

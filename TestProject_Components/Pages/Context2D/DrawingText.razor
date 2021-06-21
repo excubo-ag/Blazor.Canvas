@@ -5,11 +5,9 @@
 <h3>DrawingText</h3>
 
 For more information, please visit <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/</a>.
-
-<h4>Sorry, this demo has not been implemented yet. The API however is implemented. Contributions to demos are very welcome <a href="https://github.com/excubo-ag/Blazor.Canvas">in the github repository</a></h4>
-
+<hr />
 <Canvas @ref="canvas" width="400" height="400" style="border: 5px solid red" />
-
+<hr />
 <ol>
     @if (Messages != null)
     {
@@ -48,8 +46,8 @@ For more information, please visit <a href="https://developer.mozilla.org/en-US/
             Messages.Add("Wrote hello");
             await ctx.FillTextAsync("canvas", 100, 10);
             Messages.Add("Wrote canvas");
-            var measurement = await ctx.MeasureTextAsync("Hello canvas");
-            Messages.Add($"Measured \"Hello canvas\": {JsonSerializer.Serialize(measurement, new JsonSerializerOptions { WriteIndented = true })}");
+            var measurement = await ctx.MeasureTextAsync("Hello canvas' metrics");
+            Messages.Add($"Measured \"Hello canvas' metrics\": {JsonSerializer.Serialize(measurement, new JsonSerializerOptions { WriteIndented = true })}");
             Messages = Messages.ToList();
             await InvokeAsync(StateHasChanged);
         }

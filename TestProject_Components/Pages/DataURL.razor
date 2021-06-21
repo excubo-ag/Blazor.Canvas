@@ -45,7 +45,7 @@ Output is @(Output?.Length ?? 0) bytes
     {
         await using (var ctx = await canvas.GetContext2DAsync(alpha: true))
         {
-            await using (var batch = await ctx.CreateBatchAsync())
+            await using (var batch = ctx.CreateBatch())
             {
                 await ExecuteAsync(batch);
             }

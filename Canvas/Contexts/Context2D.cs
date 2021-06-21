@@ -13,9 +13,13 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// </summary>
         public partial struct _JS : IContext2DWithoutGetters.I_JS { }
         internal Context2D(string ctx, IJSRuntime js) : base(ctx, js) { }
-        public async Task<Batch2D> CreateBatchAsync()
+        [Obsolete("Use the synchronous call CreateBatch instead")]
+        public Task<Batch2D> CreateBatchAsync()
         {
-            await js.InvokeVoidAsync("eval", "window.Excubo=window.Excubo||{};window.Excubo.Canvas=window.Excubo.Canvas||{batch:(n,t)=>{n=window[`${n}`];d=n=>{let t=window;for(let e of n.split('.'))t=t[e];return t};for(let i of t)switch(i.t){case'S':n[i.i]=i.v;break;case'G':if(i.o1=='P')n[i.i]=n.createPattern(d(i.o2),i.v);else{let t=n[`create${i.o1=='L'?'Linear':'Radial'}Gradient`](...i.v);for(let n of i.o2)t.addColorStop(n.offset,n.color);n[i.i]=t}break;case'I':if(i.b)for(let t of i.v)t==undefined?n[i.i]():Array.isArray(t)?n[i.i](...t):n[i.i](t);else{let t=i.v;t==undefined?n[i.i]():Array.isArray(t)?n[i.i](...t):n[i.i](t)}break;case'C':if(i.b){const t=i.o1.length;for(let r=0;r<t;r++){let t=i.v[r],u=i.o1[r],f=i.o2[r];f==undefined?t==undefined?n[i.i](d(u)):Array.isArray(t)?n[i.i](d(u),...t):n[i.i](d(u),t):t==undefined?n[i.i](d(u),d(f)):Array.isArray(t)?n[i.i](d(u),d(f),...t):n[i.i](d(u),d(f),t)}}else{let t=i.v,r=i.o1,u=i.o2;u==undefined?t==undefined?n[i.i](d(r)):Array.isArray(t)?n[i.i](d(r),...t):n[i.i](d(r),t):t==undefined?n[i.i](d(r),d(u)):Array.isArray(t)?n[i.i](d(r),d(u),...t):n[i.i](d(r),d(u),t)}}}};");
+            return Task.FromResult(CreateBatch());
+        }
+        public Batch2D CreateBatch()
+        {
             return new Batch2D(ctx, js);
         }
     }

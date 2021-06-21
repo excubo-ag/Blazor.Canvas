@@ -44,7 +44,7 @@ This demo displays the same as the clock example, but all rendering is actually 
             await offscreen_context.TranslateAsync(200, 200);
         }
         // Step 3: render on the offscreen canvas
-        await using (var batch = await offscreen_context.CreateBatchAsync())
+        await using (var batch = offscreen_context.CreateBatch())
         {
             await DrawFaceAsync(batch);
             await DrawNumbersAsync(batch);

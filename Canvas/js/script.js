@@ -1,5 +1,12 @@
 window.Excubo = window.Excubo || {};
 window.Excubo.Canvas = window.Excubo.Canvas || {
+    measureText: (ctx, text) => {
+        ctx = window[`${ctx}`];
+        var m = ctx.measureText(text);
+        var properties = Object.entries(Object.getOwnPropertyDescriptors(TextMetrics.prototype)).filter(([k, d]) => typeof d.get === 'function');
+        var kvs = properties.map(([k, d]) => [k, m[k]]);
+        return kvs.reduce(function (p, c) { { p[c[0]] = c[1]; return p; } }, {});
+    },
     batch: (ctx, ops) => {
         ctx = window[`${ctx}`];
         // for variables in js-land, we need to decode them from path string to variable, e.g. "foo.bar" refers to window.foo.bar, hence we need to perform window['foo']['bar']

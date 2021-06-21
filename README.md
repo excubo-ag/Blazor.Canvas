@@ -128,3 +128,9 @@ There's no need to load _any_ javascript to use this library.
 ## Roadmap
 
 For the current implementation state, see [the projects overview](https://github.com/excubo-ag/Blazor.Canvas/projects/)
+
+## Changes
+
+### Version 2.6.5
+
+Due to a change in implementation, `CreateBatchAsync` no longer performs any asynchronous work. A new synchronous method `CreateBatch` was added. It is recommended to replace any use of `await context.CreateBatchAsync()` with `context.CreateBatch()`.
