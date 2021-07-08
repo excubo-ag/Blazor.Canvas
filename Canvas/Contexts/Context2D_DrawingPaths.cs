@@ -189,7 +189,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         /// <param name="fill_rule"></param>
         /// <returns></returns>
         [Group(typeof(_JS), "clip"), Group(typeof(_DrawingPaths))]
-        public ValueTask ClipAsync(FillRule fill_rule) => SetAsync("clip", fill_rule);
+        public ValueTask ClipAsync(FillRule fill_rule) => InvokeOnCtxAsync("clip", fill_rule);
         /// <summary>
         /// Creates a clipping path from the current sub-paths. Everything drawn after clip() is called appears inside the clipping path only. For an example, see Clipping paths in the Canvas tutorial.
         /// </summary>
