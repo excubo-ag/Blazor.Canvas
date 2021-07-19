@@ -4,7 +4,7 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Excubo.Blazor.Grids" Version="2.0.49" />
+    <PackageReference Include="Excubo.Blazor.Grids" Version="2.0.54" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Canvas\Blazor.Canvas.csproj" />
