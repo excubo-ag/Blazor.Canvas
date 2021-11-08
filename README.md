@@ -131,6 +131,10 @@ For the current implementation state, see [the projects overview](https://github
 
 ## Changes
 
+### Version 3.X.Y
+
+Starting with version 3.0.0, only the net6.0 TFM is targeted. This is a change to simplify dependency management and we strongly encourage all users to upgrade to net6.0.
+
 ### Version 2.6.5
 
 Due to a change in implementation, `CreateBatchAsync` no longer performs any asynchronous work. A new synchronous method `CreateBatch` was added. It is recommended to replace any use of `await context.CreateBatchAsync()` with `context.CreateBatch()`.
