@@ -30,8 +30,10 @@ namespace Excubo.Blazor.Canvas
         [JSInvokable("Callback")]
         public async Task InvokeCallback()
         {
-            var get = $"(function (blobWrapper) {{return blobWrapper.blob;}})";
-            var jSBlob = await js.InvokeAsync<IJSObjectReference>("eval", get, blobWrapper);
+            await js.InvokeVoidAsync("eval", "window.blobWrapper = {}");
+            var windowBlobWrapper = await js.InvokeAsync<IJSObjectReference>("eval", "window.blobWrapper");
+            await js.InvokeVoidAsync("Object.assign", windowBlobWrapper, blobWrapper);
+            var jSBlob = await js.InvokeAsync<IJSObjectReference>("eval", "window.blobWrapper.blob");
             var blob = new Blob(jSBlob);
             callback.Invoke(blob);
             this.Dispose();
