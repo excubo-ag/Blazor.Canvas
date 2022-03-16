@@ -16,6 +16,22 @@ namespace Excubo.Blazor.Canvas
             return js.InvokeAsync<string>("eval", get);
         }
         /// <summary>
+        /// Creates a callback for getting a Blob from a given canvas.
+        /// </summary>
+        /// <param name="js">The JS runtime, usually injected into a component.</param>
+        /// <param name="canvas">An ElementReference to the &lt;canvas&gt; tag in a component.</param>
+        /// <param name="callback">Cction that should be executed once the callback is invoked.</param>
+        /// <param name="type">The type of image format for the Blob.</param>
+        /// <param name="quality">Quality of the Blob given to the callback in the range between 0 and 1.</param>
+        /// <returns></returns>
+        public static async Task ToBlobAsync(this IJSRuntime js, ElementReference canvas, Action<Blob> callback, string type = "image/png", double? quality = null)
+        {
+            var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
+            var toBlobWrapper = $"(function (blobCallback) {{var blobWrapper = {{}};{query}.toBlob((blob)=>{{blobWrapper.blob = blob;blobCallback.objRef.invokeMethodAsync('Callback');}},'{type}'{(quality == null ? "" : ", " + quality.Value)});return blobWrapper;}})";
+            var blobCallback = new BlobCallback(js, callback);
+            blobCallback.blobWrapper = await js.InvokeAsync<IJSObjectReference>("eval", toBlobWrapper, blobCallback);
+        }
+        /// <summary>
         /// Returns a 2D context for a given canvas.
         /// </summary>
         /// <param name="js">The JS runtime, usually injected into a component.</param>
