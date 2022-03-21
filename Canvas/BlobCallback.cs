@@ -20,7 +20,7 @@ namespace Excubo.Blazor.Canvas
         public DotNetObjectReference<BlobCallback> objRef { get; init; }
 
         [JsonIgnore]
-        public IJSObjectReference blobWrapper { get; set; }
+        public IJSObjectReference BlobWrapper { get; set; }
 
         public void Dispose()
         {
@@ -30,10 +30,9 @@ namespace Excubo.Blazor.Canvas
         [JSInvokable("Callback")]
         public async Task InvokeCallback()
         {
-            await js.InvokeVoidAsync("eval", "window.blobWrapper = {}");
-            var windowBlobWrapper = await js.InvokeAsync<IJSObjectReference>("eval", "window.blobWrapper");
-            await js.InvokeVoidAsync("Object.assign", windowBlobWrapper, blobWrapper);
-            var jSBlob = await js.InvokeAsync<IJSObjectReference>("eval", "window.blobWrapper.blob");
+            var blobWrapper = await js.InvokeAsync<IJSObjectReference>("eval", "var blobWrapper = {}; blobWrapper;");
+            await js.InvokeVoidAsync("Object.assign", blobWrapper, BlobWrapper);
+            var jSBlob = await js.InvokeAsync<IJSObjectReference>("eval", "blobWrapper.blob");
             var blob = new Blob(jSBlob);
             callback.Invoke(blob);
             this.Dispose();

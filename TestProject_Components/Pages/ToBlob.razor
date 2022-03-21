@@ -17,10 +17,8 @@
 <button @onclick="ToDataURLAsync">Get canvas content as blob</button>
 
 <h6>Output Blob</h6>
-Output is: <br /> 
-<code>
-    @BlobText
-</code>
+Output is: <br />
+Blob Text is @BlobTextLength chars
 
 @using Microsoft.JSInterop
 @inject IJSRuntime js
@@ -28,19 +26,19 @@ Output is: <br />
 @code {
     private string Type { get; set; } = "image/jpeg";
     private double? EncoderOptions { get; set; }
-    private string BlobText { get; set; }
+    private int BlobTextLength { get; set; }
 
     private async Task ToDataURLAsync()
     {
         await canvas.ToBlobAsync(async (Blob blob) =>
             {
-                BlobText = await blob.JSObjectReference.InvokeAsync<string>("text");
+                var blobText = await blob.JSObjectReference.InvokeAsync<string>("text");
+                BlobTextLength = blobText.Length;
                 await InvokeAsync(StateHasChanged);
             },
             Type,
             EncoderOptions
         );
-        await InvokeAsync(StateHasChanged);
     }
     private Canvas canvas;
     protected override async Task OnAfterRenderAsync(bool firstRender)

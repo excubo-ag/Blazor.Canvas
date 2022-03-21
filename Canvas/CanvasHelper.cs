@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
+using static System.Text.Json.JsonSerializer;
 
 namespace Excubo.Blazor.Canvas
 {
@@ -27,12 +28,11 @@ namespace Excubo.Blazor.Canvas
         public static async Task ToBlobAsync(this IJSRuntime js, ElementReference canvas, Action<Blob> callback, string type = "image/png", double? quality = null)
         {
             var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
-            var toBlobWrapper = $"var blobWrapper = {{}};{query}.toBlob((blob)=>{{blobWrapper.blob = blob;window.blobCallback.objRef.invokeMethodAsync('Callback');}},'{type}'{(quality == null ? "" : ", " + quality.Value)});blobWrapper;";
+            var toBlobWrapper = $"var blobWrapper = {{}};{query}.toBlob((blob)=>{{blobWrapper.blob = blob;blobCallback.objRef.invokeMethodAsync('Callback');}},'{type}'{(quality == null ? "" : ", " + quality.Value)});blobWrapper;";
             var blobCallback = new BlobCallback(js, callback);
-            await js.InvokeVoidAsync("eval", "window.blobCallback = {}");
-            var jsBlobCallback = await js.InvokeAsync<IJSObjectReference>("eval", "window.blobCallback");
+            var jsBlobCallback = await js.InvokeAsync<IJSObjectReference>("eval", "var blobCallback = {}; blobCallback;");
             await js.InvokeVoidAsync("Object.assign", jsBlobCallback, blobCallback);
-            blobCallback.blobWrapper = await js.InvokeAsync<IJSObjectReference>("eval", toBlobWrapper);
+            blobCallback.BlobWrapper = await js.InvokeAsync<IJSObjectReference>("eval", toBlobWrapper);
         }
         /// <summary>
         /// Returns a 2D context for a given canvas.
