@@ -22,7 +22,7 @@ namespace Excubo.Blazor.Canvas.Contexts
         protected ValueTask<T> InvokeEvalAsync<T>(string calculation) => js.InvokeAsync<T>("eval", $"{calculation}");
         private ValueTask InvokeEvalAsync(string field, string calculation) => js.InvokeVoidAsync("eval", $"{ctx}.{field} = {calculation}");
         protected ValueTask SetAsync(string field, string value) => InvokeEvalAsync(field, "\"" + value + "\"");
-        protected ValueTask SetAsync(string field, bool value) => SetAsync(field, value.ToString());
+        protected ValueTask SetAsync(string field, bool value) => InvokeEvalAsync(field, value.ToString().ToLowerInvariant());
         protected ValueTask SetAsync(string field, double value) => InvokeEvalAsync(field, value.ToInvariantString());
         protected ValueTask SetAsync(string field, DOMMatrix value) => InvokeEvalAsync(field, JsonSerializer.Serialize(value));
         protected ValueTask SetAsync<TEnum>(string field, TEnum value) where TEnum : Enum => SetAsync(field, value.ToJsEnumValue());
