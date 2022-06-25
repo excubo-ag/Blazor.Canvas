@@ -27,6 +27,10 @@ namespace Excubo.Blazor.Canvas
         /// <returns></returns>
         public static async Task ToBlobAsync(this IJSRuntime js, ElementReference canvas, Action<Blob> callback, string type = "image/png", double? quality = null)
         {
+            if (js is not IJSInProcessRuntime)
+            {
+                throw new PlatformNotSupportedException("ToBlobAsync is not supported for Blazor Server");
+            }
             var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
             var toBlobWrapper = $"var blobWrapper = {{}};{query}.toBlob((blob)=>{{blobWrapper.blob = blob;blobCallback.objRef.invokeMethodAsync('Callback');}},'{type}'{(quality == null ? "" : ", " + quality.Value)});blobWrapper;";
             var blobCallback = new BlobCallback(js, callback);
