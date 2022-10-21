@@ -6,7 +6,7 @@ namespace Excubo.Blazor.Canvas
     {
         internal Blob(IJSObjectReference jSObjectReference)
         {
-            this.JSObjectReference = jSObjectReference;
+            JSObjectReference = jSObjectReference;
         }
         public IJSObjectReference JSObjectReference { get; init; }
     }

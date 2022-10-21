@@ -1,19 +1,20 @@
 ﻿using Microsoft.JSInterop;
 using System;
+using System.Threading.Tasks;
 
 namespace Excubo.Blazor.Canvas
 {
-    internal class BlobCallback : IDisposable
+    internal class BlobTaskCallback : IDisposable
     {
-        private Action<Blob> callback { get; set; }
+        private Func<Blob, Task> callback { get; set; }
 
-        public BlobCallback(Action<Blob> callback)
+        public BlobTaskCallback(Func<Blob, Task> callback)
         {
             this.callback = callback;
             objRef = DotNetObjectReference.Create(this);
         }
 
-        public DotNetObjectReference<BlobCallback> objRef { get; init; }
+        public DotNetObjectReference<BlobTaskCallback> objRef { get; init; }
 
         public void Dispose()
         {

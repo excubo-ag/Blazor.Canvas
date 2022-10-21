@@ -25,6 +25,7 @@ namespace Excubo.Blazor.Canvas
         private ElementReference canvas;
         public ValueTask<string> ToDataURLAsync(string type = "image/png", double? encoderOptions = null) => js.ToDataURLAsync(canvas, type, encoderOptions);
         public Task ToBlobAsync(Action<Blob> callback, string type = "image/png", double? quality = null) => js.ToBlobAsync(canvas, callback, type, quality);
+        public Task ToBlobAsync(Func<Blob, Task> callback, string type = "image/png", double? quality = null) => js.ToBlobAsync(canvas, callback, type, quality);
         public Task<Context2D> GetContext2DAsync(bool alpha = true, bool desynchronized = false) => js.GetContext2DAsync(canvas, alpha, desynchronized);
         [Obsolete("Sorry, not yet implemented")]
         public Task<ContextImageBitmapRendering> GetContextImageBitmapRenderingAsync() => js.GetContextImageBitmapRenderingAsync(canvas);
