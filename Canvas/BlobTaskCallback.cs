@@ -22,10 +22,10 @@ namespace Excubo.Blazor.Canvas
         }
 
         [JSInvokable("Callback")]
-        public void InvokeCallback(IJSObjectReference jSBlob)
+        public async Task InvokeCallback(IJSObjectReference jSBlob)
         {
             var blob = new Blob(jSBlob);
-            callback.Invoke(blob);
+            await callback.Invoke(blob);
             Dispose();
         }
     }
