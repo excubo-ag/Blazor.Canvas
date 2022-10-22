@@ -16,6 +16,50 @@ namespace Excubo.Blazor.Canvas
             return js.InvokeAsync<string>("eval", get);
         }
         /// <summary>
+        /// Creates a callback for getting a Blob from a given canvas.
+        /// </summary>
+        /// <param name="js">The JS runtime, usually injected into a component.</param>
+        /// <param name="canvas">An ElementReference to the &lt;canvas&gt; tag in a component.</param>
+        /// <param name="callback">Action that should be executed once the callback is invoked.</param>
+        /// <param name="type">The type of image format for the Blob.</param>
+        /// <param name="quality">Quality of the Blob given to the callback in the range between 0 and 1.</param>
+        /// <returns></returns>
+        public static async Task ToBlobAsync(this IJSRuntime js, ElementReference canvas, Action<Blob> callback, string type = "image/png", double? quality = null)
+        {
+            if (js is not IJSInProcessRuntime)
+            {
+                throw new PlatformNotSupportedException("ToBlobAsync is not supported for Blazor Server");
+            }
+            var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
+            var toBlob = $"{query}.toBlob((blob)=>{{blobCallback.objRef.invokeMethodAsync('Callback', DotNet.createJSObjectReference(blob));}},'{type}'{(quality == null ? "" : ", " + quality.Value)});";
+            var blobCallback = new BlobCallback(callback);
+            var jsBlobCallback = await js.InvokeAsync<IJSObjectReference>("eval", "var blobCallback = {}; blobCallback;");
+            await js.InvokeVoidAsync("Object.assign", jsBlobCallback, blobCallback);
+            await js.InvokeVoidAsync("eval", toBlob);
+        }
+        /// <summary>
+        /// Creates a callback for getting a Blob from a given canvas.
+        /// </summary>
+        /// <param name="js">The JS runtime, usually injected into a component.</param>
+        /// <param name="canvas">An ElementReference to the &lt;canvas&gt; tag in a component.</param>
+        /// <param name="callback">Action that should be executed once the callback is invoked.</param>
+        /// <param name="type">The type of image format for the Blob.</param>
+        /// <param name="quality">Quality of the Blob given to the callback in the range between 0 and 1.</param>
+        /// <returns></returns>
+        public static async Task ToBlobAsync(this IJSRuntime js, ElementReference canvas, Func<Blob, Task> callback, string type = "image/png", double? quality = null)
+        {
+            if (js is not IJSInProcessRuntime)
+            {
+                throw new PlatformNotSupportedException("ToBlobAsync is not supported for Blazor Server");
+            }
+            var query = $"document.querySelector('[_bl_{canvas.Id}=\"\"]')";
+            var toBlob = $"{query}.toBlob((blob)=>{{blobCallback.objRef.invokeMethodAsync('Callback', DotNet.createJSObjectReference(blob));}},'{type}'{(quality == null ? "" : ", " + quality.Value)});";
+            var blobCallback = new BlobTaskCallback(callback);
+            var jsBlobCallback = await js.InvokeAsync<IJSObjectReference>("eval", "var blobCallback = {}; blobCallback;");
+            await js.InvokeVoidAsync("Object.assign", jsBlobCallback, blobCallback);
+            await js.InvokeVoidAsync("eval", toBlob);
+        }
+        /// <summary>
         /// Returns a 2D context for a given canvas.
         /// </summary>
         /// <param name="js">The JS runtime, usually injected into a component.</param>
