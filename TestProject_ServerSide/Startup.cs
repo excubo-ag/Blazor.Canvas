@@ -22,6 +22,10 @@ namespace TestProject_ServerSide
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // configuring signalR this way allows for saving large imagedata
+            _ = services.AddSignalR(o => 
+                o.MaximumReceiveMessageSize = long.MaxValue;                
+            );    
             _ = services.AddRazorPages();
             _ = services.AddServerSideBlazor();
             _ = services.AddScoped((s) =>
