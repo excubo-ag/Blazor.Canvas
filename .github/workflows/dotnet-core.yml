@@ -36,7 +36,7 @@ jobs:
     - name: write git commit id
       run: echo -n "${GITHUB_SHA}" > app/publish/wwwroot/commit.txt
     - name: Deploy to Github Pages
-      uses: JamesIves/github-pages-deploy-action@v4.6.1
+      uses: JamesIves/github-pages-deploy-action@v4.6.3
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         branch: gh-pages # The branch the action should deploy to.
