@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
   <Import Project="package.csproj" Condition="Exists('package.csproj')" />
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <PackageId>Excubo.Blazor.Canvas</PackageId>
     <RootNamespace>Excubo.Blazor.Canvas</RootNamespace>
@@ -9,8 +9,8 @@
   <ItemGroup>
     <PackageReference Include="Excubo.Generators.Blazor" Version="1.14.18" />
     <PackageReference Include="Excubo.Generators.Grouping" Version="1.4.23" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.12" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\" />

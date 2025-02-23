@@ -1,7 +1,7 @@
 name: .NET Core deploy to GitHub pages
 
 env:
-  dotnet_version: 8.0.x
+  dotnet_version: 9.0.x
   project_name: "TestProject_ClientSide/TestProject_ClientSide.csproj"
   base_href: /Blazor.Canvas/
 
@@ -36,7 +36,7 @@ jobs:
     - name: write git commit id
       run: echo -n "${GITHUB_SHA}" > app/publish/wwwroot/commit.txt
     - name: Deploy to Github Pages
-      uses: JamesIves/github-pages-deploy-action@v4.7.2
+      uses: JamesIves/github-pages-deploy-action@v4.7.3
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         branch: gh-pages # The branch the action should deploy to.
