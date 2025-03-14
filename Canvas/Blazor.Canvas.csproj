@@ -9,8 +9,8 @@
   <ItemGroup>
     <PackageReference Include="Excubo.Generators.Blazor" Version="1.14.18" />
     <PackageReference Include="Excubo.Generators.Grouping" Version="1.4.23" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\" />
