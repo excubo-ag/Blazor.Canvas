@@ -1,0 +1,41 @@
+﻿
+/*Element container*/
+.eg-elc {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+/*Element*/
+.eg-el {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+/*Element body*/
+.eg-elbd {
+    height: 100%;
+    width: 100%;
+    grid-row: 2;
+    overflow-y: auto;
+}
+/*Resize handle*/
+.eg-rh {
+    display: none;
+    position: absolute;
+    bottom: .3em;
+    right: .3em;
+    border-bottom: 1.2em solid #00000080;
+    border-left: 1.2em solid transparent;
+    cursor: nwse-resize;
+}
+
+    .eg-rh:hover {
+        display: block;
+    }
+/*Show resize handle on element hover*/
+.eg-el:hover + .eg-rh {
+    display: block;
+}
+/*# sourceMappingURL=.\Grid\wwwroot\style.css.map */
